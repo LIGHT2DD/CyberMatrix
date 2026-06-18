@@ -1,0 +1,1194 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberMatrix · Helpline</title>
+    <!-- Font Awesome & Google Font 'Share Tech Mono' -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+    <style>
+        /* ----- RESET & MATRIX THEME ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background: #0a0f0a;
+            background-image: radial-gradient(circle at 20% 30%, #0f1a0f 0%, #020503 95%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            color: #b3ffb3;
+            text-shadow: 0 0 3px #00cc44, 0 0 8px #00882a;
+        }
+
+        /* matrix rain effect (pure CSS) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg,
+                    rgba(0, 255, 70, 0.02) 0px,
+                    rgba(0, 255, 70, 0.02) 2px,
+                    rgba(0, 20, 0, 0.1) 2px,
+                    rgba(0, 20, 0, 0.1) 4px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ----- LOGIN PAGE ----- */
+        .login-wrapper {
+            max-width: 440px;
+            width: 100%;
+            background: rgba(6, 15, 6, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 2.6rem;
+            padding: 2.8rem 2.2rem 2.4rem;
+            box-shadow: 0 0 0 1px #1f8a3a, 0 0 40px #00aa3322, inset 0 0 40px #00aa3311;
+            border: 1px solid #2aac4a;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .login-wrapper.hidden {
+            display: none;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .brand i {
+            font-size: 2.6rem;
+            color: #3ddf6a;
+            filter: drop-shadow(0 0 20px #22dd66);
+            text-shadow: 0 0 30px #33dd55;
+        }
+
+        .brand h1 {
+            font-weight: 400;
+            font-size: 2rem;
+            letter-spacing: 3px;
+            color: #aaffaa;
+            text-shadow: 0 0 16px #22dd66, 0 0 40px #22aa44;
+        }
+
+        .subtitle {
+            font-size: 0.75rem;
+            color: #66dd88;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px #00cc44;
+            margin-top: -0.8rem;
+            margin-bottom: 2.2rem;
+            border-bottom: 1px solid #1f7a33;
+            padding-bottom: 1rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.7rem;
+            color: #88dd99;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.4rem;
+            text-shadow: 0 0 6px #00aa33;
+        }
+
+        .input-group .input-wrap {
+            display: flex;
+            align-items: center;
+            background: rgba(2, 15, 4, 0.8);
+            border-radius: 60px;
+            border: 1px solid #1f7a33;
+            padding: 0.1rem 0.1rem 0.1rem 1.2rem;
+            transition: border 0.2s, box-shadow 0.2s;
+            box-shadow: inset 0 0 20px #00331a33;
+        }
+
+        .input-group .input-wrap:focus-within {
+            border-color: #3ad86a;
+            box-shadow: 0 0 0 2px #2aac4a55, 0 0 30px #00dd5533;
+        }
+
+        .input-group .input-wrap i {
+            color: #44dd77;
+            font-size: 0.9rem;
+            margin-right: 0.6rem;
+            text-shadow: 0 0 8px #22dd66;
+        }
+
+        .input-group input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 0.8rem 0.4rem 0.8rem 0;
+            font-size: 0.9rem;
+            color: #ccffcc;
+            font-family: 'Share Tech Mono', monospace;
+            outline: none;
+            letter-spacing: 1px;
+            text-shadow: 0 0 6px #22aa44;
+        }
+
+        .input-group input::placeholder {
+            color: #448855;
+            text-shadow: 0 0 4px #228833;
+            letter-spacing: 0.5px;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(145deg, #0f3f1a, #0a2a12);
+            border: 1px solid #2aac4a;
+            color: #ccffcc;
+            font-size: 1.1rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 60px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 20px #00aa3322;
+            font-family: 'Share Tech Mono', monospace;
+            text-shadow: 0 0 10px #33dd66;
+            letter-spacing: 2px;
+            margin-top: 0.6rem;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(145deg, #1c5a2a, #0f3f1a);
+            border-color: #5af088;
+            box-shadow: 0 0 40px #22dd6655;
+            transform: scale(1.02);
+        }
+
+        .login-btn:active {
+            transform: scale(0.97);
+        }
+
+        .error-msg {
+            color: #ff7777;
+            font-size: 0.75rem;
+            margin-top: 1rem;
+            min-height: 1.5rem;
+            text-shadow: 0 0 12px #ff3333;
+            letter-spacing: 0.5px;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .error-msg.show {
+            opacity: 1;
+        }
+
+        .error-msg i {
+            margin-right: 6px;
+        }
+
+        .footer-note {
+            margin-top: 1.8rem;
+            font-size: 0.6rem;
+            color: #448855;
+            text-shadow: 0 0 6px #228833;
+            letter-spacing: 1px;
+            border-top: 1px solid #1f7a33;
+            padding-top: 1.2rem;
+        }
+
+        .footer-note i {
+            color: #44dd77;
+        }
+
+        /* ----- MAIN APP (hidden by default) ----- */
+        .app-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(6, 15, 6, 0.88);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-radius: 2.6rem;
+            padding: 1.6rem 1.8rem 1.6rem 1.6rem;
+            box-shadow: 0 0 0 1px #1f8a3a, 0 0 30px #00aa3322, inset 0 0 30px #00aa3311;
+            border: 1px solid #2aac4a;
+            display: none;
+            gap: 1.6rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .app-wrapper.visible {
+            display: flex;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            flex: 0 0 190px;
+            background: rgba(2, 12, 2, 0.75);
+            border-radius: 2rem;
+            padding: 1.2rem 0.6rem;
+            border: 1px solid #1f7a33;
+            box-shadow: inset 0 0 20px #003d1a33;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #2aac4a;
+            border-radius: 12px;
+        }
+
+        .sidebar h4 {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #66dd88;
+            padding: 0 0.4rem 0.8rem 0.4rem;
+            border-bottom: 1px solid #1f7a33;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 6px #00cc44;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.6rem 0.8rem;
+            border-radius: 14px;
+            margin-bottom: 0.25rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #88dd99;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border: 1px solid transparent;
+            text-shadow: 0 0 2px #00aa33;
+        }
+
+        .sidebar-item i {
+            width: 20px;
+            color: #44dd77;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-item:hover {
+            background: #0f2f1a;
+            border-color: #3ad86a;
+            color: #ddffdd;
+            transform: translateX(4px);
+            box-shadow: 0 0 16px #00dd5533;
+        }
+
+        .sidebar-item.active {
+            background: #0f371a;
+            border-color: #3ad86a;
+            color: #eeffee;
+            box-shadow: 0 0 18px #00dd5544, inset 0 0 8px #00dd5522;
+        }
+
+        /* MAIN CHAT */
+        .main-chat {
+            flex: 1;
+            min-width: 260px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .header .brand {
+            margin-bottom: 0;
+        }
+
+        .badge {
+            margin-left: auto;
+            background: rgba(0, 60, 20, 0.5);
+            padding: 0.25rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 400;
+            color: #88dd99;
+            border: 1px solid #2aac4a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 6px #00cc44;
+        }
+
+        .badge i {
+            color: #66ff88;
+            font-size: 0.55rem;
+        }
+
+        .logout-btn-small {
+            background: rgba(40, 20, 20, 0.6);
+            border: 1px solid #8a3a3a;
+            color: #ff9999;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Share Tech Mono', monospace;
+            letter-spacing: 1px;
+            text-shadow: 0 0 6px #ff3333;
+        }
+
+        .logout-btn-small:hover {
+            background: #3a1a1a;
+            border-color: #cc5555;
+            box-shadow: 0 0 20px #ff333344;
+        }
+
+        .chat-window {
+            background: rgba(2, 12, 4, 0.8);
+            border-radius: 1.8rem;
+            padding: 1rem 1rem 0.6rem;
+            min-height: 370px;
+            max-height: 440px;
+            overflow-y: auto;
+            margin-bottom: 1.2rem;
+            border: 1px solid #1f7a33;
+            box-shadow: inset 0 0 30px #00331a33, 0 0 20px #00aa3311;
+            scroll-behavior: smooth;
+        }
+
+        .chat-window::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .chat-window::-webkit-scrollbar-track {
+            background: #051005;
+        }
+
+        .chat-window::-webkit-scrollbar-thumb {
+            background: #2aac4a;
+            border-radius: 12px;
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            margin-bottom: 1rem;
+            animation: fadeSlide 0.25s ease;
+        }
+
+        .message .avatar {
+            width: 34px;
+            height: 34px;
+            background: #0b1f0f;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+            color: #88dd99;
+            border: 1px solid #2aac4a;
+            box-shadow: 0 0 10px #00aa3322;
+        }
+
+        .message.user .avatar {
+            background: #0f2a14;
+            border-color: #3ad86a;
+        }
+
+        .message.bot .avatar {
+            background: #081f0c;
+            border-color: #2aac4a;
+        }
+
+        .bubble {
+            background: rgba(8, 30, 12, 0.8);
+            padding: 0.7rem 1.2rem;
+            border-radius: 18px 18px 18px 4px;
+            max-width: 88%;
+            line-height: 1.6;
+            font-size: 0.9rem;
+            border: 1px solid #1f7a33;
+            box-shadow: 0 2px 12px rgba(0, 20, 0, 0.6);
+            word-break: break-word;
+            color: #bbffbb;
+            text-shadow: 0 0 4px #22aa44;
+        }
+
+        .message.user .bubble {
+            background: #0c2a14;
+            border-radius: 18px 18px 4px 18px;
+            margin-left: auto;
+            border-color: #3ad86a;
+            color: #ddffdd;
+            text-shadow: 0 0 6px #33dd66;
+        }
+
+        .message.bot .bubble {
+            background: #061f0a;
+            border-color: #1f7a33;
+        }
+
+        .bubble strong {
+            color: #88ff99;
+            text-shadow: 0 0 10px #44dd66;
+        }
+
+        .bubble i {
+            color: #66dd88;
+        }
+
+        .timestamp {
+            font-size: 0.55rem;
+            opacity: 0.6;
+            margin-top: 0.2rem;
+            display: block;
+            color: #88dd99;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 0.6rem;
+            margin: 0.1rem 0 0.6rem 0.8rem;
+        }
+
+        .typing-indicator .dot {
+            width: 8px;
+            height: 8px;
+            background: #44dd77;
+            border-radius: 50%;
+            animation: pulseDot 1.4s infinite both;
+            box-shadow: 0 0 12px #33dd66;
+        }
+
+        .typing-indicator .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes pulseDot {
+            0%,
+            80%,
+            100% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
+            40% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        .search-box {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(2, 15, 4, 0.8);
+            padding: 0.3rem 0.3rem 0.3rem 1.2rem;
+            border-radius: 80px;
+            border: 1px solid #1f7a33;
+            backdrop-filter: blur(4px);
+            transition: border 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 20px #00aa3315;
+        }
+
+        .search-box:focus-within {
+            border-color: #3ad86a;
+            box-shadow: 0 0 0 2px #2aac4a55, 0 0 30px #00dd5533;
+        }
+
+        .search-box input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 0.7rem 0;
+            font-size: 0.9rem;
+            color: #ccffcc;
+            font-family: 'Share Tech Mono', monospace;
+            outline: none;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 6px #22aa44;
+        }
+
+        .search-box input::placeholder {
+            color: #448855;
+            text-shadow: 0 0 4px #228833;
+        }
+
+        .search-box button {
+            background: linear-gradient(145deg, #0f3f1a, #0a2a12);
+            border: 1px solid #2aac4a;
+            color: #ccffcc;
+            font-size: 0.9rem;
+            padding: 0.6rem 1.5rem;
+            border-radius: 60px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 400;
+            transition: all 0.18s ease;
+            box-shadow: 0 0 16px #00aa3322;
+            font-family: 'Share Tech Mono', monospace;
+            text-shadow: 0 0 8px #33dd66;
+        }
+
+        .search-box button:hover {
+            background: linear-gradient(145deg, #1c5a2a, #0f3f1a);
+            border-color: #5af088;
+            box-shadow: 0 0 30px #22dd6655;
+            transform: scale(1.02);
+        }
+
+        .quick-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+
+        .tag {
+            background: rgba(10, 50, 16, 0.5);
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 400;
+            color: #99dd99;
+            border: 1px solid #1f7a33;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            text-shadow: 0 0 4px #22aa44;
+            letter-spacing: 0.3px;
+        }
+
+        .tag i {
+            font-size: 0.6rem;
+            color: #44dd77;
+        }
+
+        .tag:hover {
+            background: #1a4a2a;
+            border-color: #3ad86a;
+            color: #eeffee;
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px #22dd6644;
+        }
+
+        .app-wrapper .footer-note {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        @keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* responsive */
+        @media (max-width: 780px) {
+            .app-wrapper {
+                padding: 1rem;
+                flex-direction: column;
+            }
+            .sidebar {
+                flex: 1 1 auto;
+                max-height: 170px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.2rem;
+                padding: 0.8rem;
+            }
+            .sidebar h4 {
+                width: 100%;
+                margin-bottom: 0.3rem;
+            }
+            .sidebar-item {
+                flex: 0 0 auto;
+                padding: 0.3rem 0.8rem;
+                margin-bottom: 0;
+            }
+            .brand h1 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-box {
+                padding-left: 0.8rem;
+            }
+            .search-box button {
+                padding: 0.4rem 0.9rem;
+                font-size: 0.75rem;
+            }
+            .bubble {
+                max-width: 95%;
+            }
+            .login-wrapper {
+                padding: 2rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== LOGIN PAGE ===== -->
+    <div class="login-wrapper" id="loginWrapper">
+        <div class="brand">
+            <i class="fas fa-shield-halved"></i>
+            <h1>CyberMatrix</h1>
+        </div>
+        <div class="subtitle">
+            <i class="fas fa-lock" style="margin-right: 8px"></i> SECURE ACCESS ·
+            v2.0
+        </div>
+
+        <form id="loginForm" autocomplete="off">
+            <div class="input-group">
+                <label for="username"><i class="fas fa-user" style="margin-right: 6px"></i> USERNAME</label>
+                <div class="input-wrap">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" placeholder="enter username" value="admin123" required />
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="password"><i class="fas fa-key" style="margin-right: 6px"></i> PASSWORD</label>
+                <div class="input-wrap">
+                    <i class="fas fa-key"></i>
+                    <input type="password" id="password" placeholder="••••••••" value="admin123" required />
+                </div>
+            </div>
+
+            <button type="submit" class="login-btn">
+                <i class="fas fa-arrow-right-to-bracket"></i> LOGIN
+            </button>
+
+            <div class="error-msg" id="errorMsg">
+                <i class="fas fa-triangle-exclamation"></i> Invalid credentials. Try again.
+            </div>
+        </form>
+
+        <div class="footer-note">
+            <i class="fas fa-lock"></i> matrix protocol · green access only
+        </div>
+    </div>
+
+    <!-- ===== MAIN APP (hidden until login) ===== -->
+    <div class="app-wrapper" id="appWrapper">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <h4><i class="fas fa-folder-tree" style="margin-right: 6px"></i> MATRIX</h4>
+            <div class="sidebar-item active" data-topic="all">
+                <i class="fas fa-compass"></i> All
+            </div>
+            <div class="sidebar-item" data-topic="threats">
+                <i class="fas fa-skull"></i> Threats
+            </div>
+            <div class="sidebar-item" data-topic="defense">
+                <i class="fas fa-shield"></i> Defense
+            </div>
+            <div class="sidebar-item" data-topic="identity">
+                <i class="fas fa-id-card"></i> Identity
+            </div>
+            <div class="sidebar-item" data-topic="network">
+                <i class="fas fa-network-wired"></i> Network
+            </div>
+            <div class="sidebar-item" data-topic="cloud">
+                <i class="fas fa-cloud"></i> Cloud
+            </div>
+            <div class="sidebar-item" data-topic="incident">
+                <i class="fas fa-triangle-exclamation"></i> IR
+            </div>
+            <div class="sidebar-item" data-topic="awareness">
+                <i class="fas fa-users"></i> Aware
+            </div>
+        </aside>
+
+        <!-- MAIN CHAT -->
+        <section class="main-chat">
+            <div class="header">
+                <div class="brand">
+                    <i class="fas fa-shield-halved"></i>
+                    <h1>CyberMatrix</h1>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-circle" style="color: #66ff88"></i> Helpline · v2.0
+                </div>
+                <button class="logout-btn-small" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> LOGOUT
+                </button>
+            </div>
+
+            <div class="chat-window" id="chatWindow">
+                <div id="messageContainer">
+                    <div class="message bot">
+                        <div class="avatar"><i class="fas fa-robot"></i></div>
+                        <div class="bubble">
+                            <strong>🔰 MATRIX SECURITY</strong><br />
+                            Follow the green glow. Ask about threats, defense, identity, or
+                            any cyber topic.
+                            <span style="display: block; margin-top: 5px; font-size: 0.8rem; opacity: 0.8;">
+                                <i class="fas fa-search"></i> Try: "phishing", "ransomware",
+                                "2FA", "zero trust"
+                            </span>
+                            <span class="timestamp">⏱️ online</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="typing-indicator" id="typingIndicator">
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    <span style="margin-left: 8px; font-size: 0.65rem; color: #66dd88">decrypting...</span>
+                </div>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="> enter query..." autofocus />
+                <button id="sendBtn"><i class="fas fa-paper-plane"></i> EXEC</button>
+            </div>
+
+            <div class="quick-tags" id="quickTags">
+                <span class="tag" data-query="phishing"><i class="fas fa-fish"></i> Phishing</span>
+                <span class="tag" data-query="ransomware"><i class="fas fa-skull"></i> Ransomware</span>
+                <span class="tag" data-query="MFA"><i class="fas fa-key"></i> MFA</span>
+                <span class="tag" data-query="vulnerability"><i class="fas fa-bug"></i> CVE</span>
+                <span class="tag" data-query="zero-day"><i class="fas fa-biohazard"></i> Zero-day</span>
+                <span class="tag" data-query="firewall"><i class="fas fa-firewall"></i> Firewall</span>
+                <span class="tag" data-query="zero trust"><i class="fas fa-lock"></i> Zero Trust</span>
+            </div>
+            <div class="footer-note">
+                <i class="fas fa-lock"></i> green · matrix protocol
+            </div>
+        </section>
+    </div>
+
+    <script>
+        (function() {
+            "use strict";
+
+            // ===== LOGIN LOGIC =====
+            const loginWrapper = document.getElementById("loginWrapper");
+            const appWrapper = document.getElementById("appWrapper");
+            const loginForm = document.getElementById("loginForm");
+            const errorMsg = document.getElementById("errorMsg");
+            const usernameInput = document.getElementById("username");
+            const passwordInput = document.getElementById("password");
+            const logoutBtn = document.getElementById("logoutBtn");
+
+            const VALID_USERNAME = "admin123";
+            const VALID_PASSWORD = "admin123";
+
+            function showError(show) {
+                errorMsg.classList.toggle("show", show);
+            }
+
+            function handleLogin(e) {
+                e.preventDefault();
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value.trim();
+
+                if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+                    // Success: hide login, show app
+                    loginWrapper.classList.add("hidden");
+                    appWrapper.classList.add("visible");
+                    showError(false);
+                    passwordInput.value = "admin123"; // reset for next time
+                    // Focus search in app
+                    document.getElementById("searchInput").focus();
+                } else {
+                    showError(true);
+                    passwordInput.value = "";
+                    passwordInput.focus();
+                }
+            }
+
+            function handleLogout() {
+                appWrapper.classList.remove("visible");
+                loginWrapper.classList.remove("hidden");
+                usernameInput.value = "admin123";
+                passwordInput.value = "admin123";
+                showError(false);
+                usernameInput.focus();
+            }
+
+            loginForm.addEventListener("submit", handleLogin);
+            logoutBtn.addEventListener("click", handleLogout);
+
+            usernameInput.addEventListener("input", () => showError(false));
+            passwordInput.addEventListener("input", () => showError(false));
+
+            window.addEventListener("load", () => {
+                usernameInput.focus();
+                showError(false);
+            });
+
+            // ===== CHATBOT LOGIC =====
+            const knowledgeBase = [{
+                keywords: [
+                    "phishing",
+                    "phish",
+                    "email scam",
+                    "fake email",
+                    "spear phishing",
+                ],
+                category: "threats",
+                answer: "🛡️ <strong>Phishing</strong> – social engineering via fake emails/links. <br>🔹 <i>Prevention:</i> Verify sender, hover links, enable MFA, use email filters.",
+            }, {
+                keywords: [
+                    "ransomware",
+                    "ransom",
+                    "encrypt",
+                    "decrypt",
+                    "pay",
+                    "cryptolocker",
+                ],
+                category: "threats",
+                answer: "💀 <strong>Ransomware</strong> encrypts files & demands payment. <br>🔹 <i>Defense:</i> Offline backups, patch systems, disable macros, EDR. Never pay.",
+            }, {
+                keywords: [
+                    "malware",
+                    "virus",
+                    "trojan",
+                    "worm",
+                    "rootkit",
+                    "spyware",
+                    "keylogger",
+                ],
+                category: "threats",
+                answer: "🦠 <strong>Malware</strong> – viruses, worms, trojans, spyware. <br>🔹 <i>Protection:</i> EDR/AV, update definitions, restrict admin.",
+            }, {
+                keywords: [
+                    "ddos",
+                    "dos",
+                    "distributed denial",
+                    "flood",
+                    "mitigation",
+                ],
+                category: "threats",
+                answer: "🌊 <strong>DDoS</strong> – distributed denial-of-service floods resources. <br>🔹 Mitigation: Cloudflare/AWS Shield, rate limiting.",
+            }, {
+                keywords: ["zero-day", "0day", "unknown vulnerability"],
+                category: "threats",
+                answer: "⚡ <strong>Zero-day</strong> – unpatched vulnerability exploited before disclosure. <br>🔹 Monitor threat intel, apply virtual patches.",
+            }, {
+                keywords: [
+                    "firewall",
+                    "next-gen",
+                    "ngfw",
+                    "ids",
+                    "ips",
+                    "network security",
+                ],
+                category: "defense",
+                answer: "🔥 <strong>Firewall & network security</strong> – control traffic, NGFW with IPS/IDS. <br>🔹 Segment networks, block malicious IPs.",
+            }, {
+                keywords: [
+                    "vulnerability",
+                    "cve",
+                    "exploit",
+                    "patch",
+                    "bug",
+                    "scanning",
+                ],
+                category: "defense",
+                answer: "🐞 <strong>Vulnerability management</strong> – track CVEs, prioritize patching, use scanners. <br>🔹 Defense-in-depth.",
+            }, {
+                keywords: [
+                    "encryption",
+                    "aes",
+                    "rsa",
+                    "tls",
+                    "ssl",
+                    "certificate",
+                    "cryptography",
+                ],
+                category: "defense",
+                answer: "🔒 <strong>Encryption</strong> – AES, RSA, TLS. <br>🔹 Use strong ciphers, manage keys, renew certs.",
+            }, {
+                keywords: [
+                    "zero trust",
+                    "ztna",
+                    "never trust",
+                    "always verify",
+                    "micro-segmentation",
+                ],
+                category: "defense",
+                answer: '🛡️ <strong>Zero Trust</strong> – "never trust, always verify". <br>🔹 Enforce least privilege, micro-segment, continuous authentication.',
+            }, {
+                keywords: [
+                    "mfa",
+                    "2fa",
+                    "multi factor",
+                    "two factor",
+                    "authenticator",
+                    "topt",
+                ],
+                category: "identity",
+                answer: "🔑 <strong>MFA/2FA</strong> – adds second layer. Use TOTP or hardware keys. <br>🔹 Avoid SMS. Enforce for all users.",
+            }, {
+                keywords: [
+                    "password",
+                    "passphrase",
+                    "password manager",
+                    "credential",
+                    "brute force",
+                ],
+                category: "identity",
+                answer: "🔐 <strong>Password security</strong> – long passphrases, unique. Use password manager. <br>🔹 Enable MFA, change defaults.",
+            }, {
+                keywords: [
+                    "iam",
+                    "identity",
+                    "access management",
+                    "rbac",
+                    "least privilege",
+                ],
+                category: "identity",
+                answer: "🪪 <strong>IAM & access control</strong> – manage identities, enforce least privilege, RBAC. <br>🔹 Regular audits.",
+            }, {
+                keywords: [
+                    "network",
+                    "vpn",
+                    "vlan",
+                    "segmentation",
+                    "switch",
+                    "router",
+                ],
+                category: "network",
+                answer: "🌐 <strong>Network security</strong> – segment VLANs, use VPNs, secure routers/switches. <br>🔹 Disable unused ports.",
+            }, {
+                keywords: ["dns", "spoofing", "cache poisoning", "dnsec"],
+                category: "network",
+                answer: "📡 <strong>DNS security</strong> – protect against spoofing/poisoning. <br>🔹 Use DNSSEC, restrict recursive queries.",
+            }, {
+                keywords: [
+                    "cloud",
+                    "aws",
+                    "azure",
+                    "gcp",
+                    "s3",
+                    "iam",
+                    "shared responsibility",
+                ],
+                category: "cloud",
+                answer: "☁️ <strong>Cloud security</strong> – secure IAM, enable logging, encrypt data, follow shared responsibility. <br>🔹 Audit permissions.",
+            }, {
+                keywords: [
+                    "incident response",
+                    "ir",
+                    "breach",
+                    "data breach",
+                    "response plan",
+                    "playbook",
+                ],
+                category: "incident",
+                answer: "🚨 <strong>Incident Response</strong> – Prepare, Identify, Contain, Eradicate, Recover. <br>🔹 Have playbook, tabletop exercises.",
+            }, {
+                keywords: [
+                    "security awareness",
+                    "training",
+                    "human factor",
+                    "culture",
+                    "phishing simulation",
+                ],
+                category: "awareness",
+                answer: "🧑‍🏫 <strong>Security awareness</strong> – educate on phishing, password hygiene. <br>🔹 Simulated attacks, gamified training.",
+            }, ];
+
+            const messageContainer = document.getElementById("messageContainer");
+            const chatWindow = document.getElementById("chatWindow");
+            const searchInput = document.getElementById("searchInput");
+            const sendBtn = document.getElementById("sendBtn");
+            const typingIndicator = document.getElementById("typingIndicator");
+            const sidebarItems = document.querySelectorAll(".sidebar-item");
+            const quickTags = document.getElementById("quickTags");
+
+            let currentCategory = "all";
+
+            function scrollToBottom() {
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            }
+
+            function addMessage(text, sender = "bot") {
+                const msgDiv = document.createElement("div");
+                msgDiv.className = `message ${sender}`;
+                const avatar = document.createElement("div");
+                avatar.className = "avatar";
+                avatar.innerHTML =
+                    sender === "bot" ?
+                    '<i class="fas fa-robot"></i>' :
+                    '<i class="fas fa-user"></i>';
+                const bubble = document.createElement("div");
+                bubble.className = "bubble";
+                bubble.innerHTML = text;
+                const time = document.createElement("span");
+                time.className = "timestamp";
+                const now = new Date();
+                time.textContent =
+                    `⏱️ ${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
+                bubble.appendChild(time);
+                msgDiv.appendChild(avatar);
+                msgDiv.appendChild(bubble);
+                messageContainer.appendChild(msgDiv);
+                scrollToBottom();
+            }
+
+            function setTyping(visible) {
+                typingIndicator.style.display = visible ? "flex" : "none";
+                if (visible) scrollToBottom();
+            }
+
+            function searchKnowledge(query, categoryFilter = "all") {
+                const lower = query.trim().toLowerCase();
+                if (!lower) return null;
+                let matches = [];
+                for (let entry of knowledgeBase) {
+                    if (categoryFilter !== "all" && entry.category !== categoryFilter)
+                        continue;
+                    for (let kw of entry.keywords) {
+                        if (lower.includes(kw) || kw.includes(lower)) {
+                            matches.push(entry);
+                            break;
+                        }
+                    }
+                }
+                return matches.length ? matches[0].answer : null;
+            }
+
+            function getFallback(query, categoryFilter = "all") {
+                const lower = query.toLowerCase();
+                if (
+                    lower.includes("hello") ||
+                    lower.includes("hi") ||
+                    lower.includes("hey")
+                ) {
+                    return "👋 Greetings. I am the CyberMatrix. Ask about threats, defense, identity, or incidents.";
+                }
+                if (lower.includes("help") || lower.includes("support")) {
+                    return "🆘 <strong>Query assistance:</strong><br> Try: phishing, ransomware, MFA, vulnerabilities, zero trust, cloud security, or incident response.";
+                }
+                let catHint =
+                    categoryFilter !== "all" ? ` in "${categoryFilter}"` : "";
+                return `📡 No direct match for "<strong>${query}</strong>"${catHint}. <br>🔹 Suggestions: <br> • Check CVE/NVD <br> • Enable logging <br> • Least privilege <br> • Keep updated <br> • Contact security team.`;
+            }
+
+            function getResponse(userQuery, categoryFilter = "all") {
+                const direct = searchKnowledge(userQuery, categoryFilter);
+                return direct || getFallback(userQuery, categoryFilter);
+            }
+
+            function handleUserQuery(query) {
+                const trimmed = query.trim();
+                if (!trimmed) {
+                    addMessage("🤔 Enter a cybersecurity query.", "bot");
+                    return;
+                }
+                addMessage(trimmed, "user");
+                setTyping(true);
+                const delay = 180 + Math.floor(Math.random() * 350);
+                setTimeout(() => {
+                    setTyping(false);
+                    const answer = getResponse(trimmed, currentCategory);
+                    addMessage(answer, "bot");
+                }, delay);
+            }
+
+            function onSend() {
+                const query = searchInput.value;
+                handleUserQuery(query);
+                searchInput.value = "";
+                searchInput.focus();
+            }
+
+            sendBtn.addEventListener("click", onSend);
+            searchInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    onSend();
+                }
+            });
+
+            quickTags.addEventListener("click", (e) => {
+                const tag = e.target.closest(".tag");
+                if (!tag) return;
+                const query =
+                    tag.getAttribute("data-query") || tag.textContent.trim();
+                searchInput.value = query;
+                onSend();
+            });
+
+            sidebarItems.forEach((item) => {
+                item.addEventListener("click", function() {
+                    sidebarItems.forEach((i) => i.classList.remove("active"));
+                    this.classList.add("active");
+                    currentCategory = this.getAttribute("data-topic");
+                    const catName =
+                        currentCategory === "all" ?
+                        "All topics" :
+                        currentCategory.charAt(0).toUpperCase() +
+                        currentCategory.slice(1);
+                    addMessage(`📂 <strong>Filter:</strong> ${catName}`, "bot");
+                    searchInput.focus();
+                });
+            });
+
+            // tip after login
+            let tipShown = false;
+            setTimeout(() => {
+                if (!tipShown && messageContainer.children.length < 3) {
+                    tipShown = true;
+                    const tips = [
+                        "💡 <i>Tip:</i> Use sidebar to filter topics.",
+                        "💡 <i>Tip:</i> Enable MFA on all critical accounts.",
+                        "💡 <i>Tip:</i> Regularly back up offline.",
+                        "💡 <i>Tip:</i> Keep software patched.",
+                    ];
+                    addMessage(tips[Math.floor(Math.random() * tips.length)], "bot");
+                }
+            }, 3500);
+        })();
+    </script>
+</body>
+</html>
