@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberMatrix · Image Upload</title>
+
+    <!-- Font Awesome & Google Font 'Share Tech Mono' -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="image-upload.css" />
+</head>
+<body>
+    <!-- ===== UPLOAD CONTAINER ===== -->
+    <div class="upload-container">
+        <!-- Header -->
+        <div class="brand">
+            <i class="fas fa-shield-halved"></i>
+            <h1>CyberMatrix</h1>
+        </div>
+        <div class="subtitle">
+            <i class="fas fa-image" style="margin-right: 8px"></i> IMAGE UPLOAD ·
+            v2.0
+        </div>
+
+        <!-- Back to Chat Link -->
+        <div style="text-align: left; margin-bottom: 1rem;">
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Chat
+            </a>
+        </div>
+
+        <!-- ===== DROP ZONE ===== -->
+        <div class="drop-zone" id="dropZone">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p><strong>Drag & drop your image here</strong></p>
+            <p class="hint">or click to browse</p>
+            <p class="hint" style="margin-top: 0.5rem; font-size: 0.65rem;">
+                <i class="fas fa-info-circle"></i> Supports: JPG, PNG, GIF, SVG, WebP
+            </p>
+            <input type="file" id="fileInput" accept="image/*" />
+        </div>
+
+        <!-- ===== PREVIEW SECTION ===== -->
+        <div class="preview-section" id="previewSection">
+            <div class="image-wrapper">
+                <img id="imagePreview" src="" alt="Image preview" />
+            </div>
+            <div class="file-info">
+                <div class="details">
+                    <span id="fileName">filename.jpg</span> ·
+                    <span id="fileSize">0 KB</span> ·
+                    <span id="fileDimensions">0x0</span>
+                </div>
+                <div class="actions">
+                    <button class="btn btn-danger" id="removeBtn">
+                        <i class="fas fa-trash"></i> Remove
+                    </button>
+                    <button class="btn btn-success" id="uploadBtn">
+                        <i class="fas fa-upload"></i> Upload
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== UPLOAD STATUS ===== -->
+        <div class="upload-status" id="uploadStatus">
+            <div id="statusMessage">
+                <i class="fas fa-check-circle"></i> Upload successful!
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- ===== RECENT UPLOADS ===== -->
+        <div class="recent-uploads" id="recentUploads">
+            <h4><i class="fas fa-history"></i> Recent Uploads</h4>
+            <div class="uploads-list" id="uploadsList">
+                <!-- Uploaded items will appear here -->
+                <p class="empty-msg">No images uploaded yet</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-note">
+            <span><i class="fas fa-lock"></i> matrix protocol · green access only</span>
+            <span><i class="fas fa-shield-alt"></i> encrypted transfer</span>
+        </div>
+    </div>
+
+    <script src="image-upload.js"></script>
+</body>
+</html>
