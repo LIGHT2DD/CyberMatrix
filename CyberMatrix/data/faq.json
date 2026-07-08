@@ -1,0 +1,30 @@
+[
+    {
+        "question": "What is CyberMatrix?",
+        "answer": "CyberMatrix is a cybersecurity intelligence platform providing threat analysis, security tools, educational articles, and an AI-powered helpline. All tools run client-side in your browser."
+    },
+    {
+        "question": "Are the security tools safe to use?",
+        "answer": "Yes. All tools (password generator, hash generator, encoders, JSON formatter) run entirely in your browser. No data is ever sent to our servers. We never see your passwords or input data."
+    },
+    {
+        "question": "What threats does CyberMatrix track?",
+        "answer": "We track malware, phishing, ransomware, DDoS attacks, zero-day exploits, social engineering campaigns, and insider threats. Our threat intelligence is updated regularly."
+    },
+    {
+        "question": "How do I use the AI Helpline?",
+        "answer": "Navigate to the Helpline page, log in with the demo credentials, and type your cybersecurity question. The AI assistant covers threats, defense, identity, network, cloud, and incident response topics."
+    },
+    {
+        "question": "Is CyberMatrix free?",
+        "answer": "Yes! CyberMatrix is a free educational platform and portfolio project. All tools, articles, and resources are available at no cost."
+    },
+    {
+        "question": "Do I need to create an account?",
+        "answer": "An account is only needed for the dashboard features (saving articles, bookmarks). The majority of the site — threats, tools, articles, news, and helpline — is accessible without registration."
+    },
+    {
+        "question": "How often is threat data updated?",
+        "answer": "Threat intelligence is updated as new information becomes available. News and alerts are curated daily from trusted sources including CISA, NIST, ENISA, and security researchers."
+    }
+]

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Security Tools — CyberMatrix</title>
+    <meta name="description" content="Free online cybersecurity tools: password generator, hash generator, Base64/URL encoder-decoder, JSON formatter, and more." />
+    <link rel="stylesheet" href="assets/css/matrix-theme.css" />
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="section-title"><i class="fas fa-tools"></i> Security Tools</h1>
+            <p class="section-subtitle">// client-side utilities for security professionals</p>
+            
+            <div class="disclaimer panel-alt" style="margin-bottom: 2rem; text-align: center; padding: 1rem;">
+                <i class="fas fa-lock" style="color: #44dd77; margin-right: 0.5rem;"></i>
+                <strong>All tools run entirely in your browser.</strong> No data is sent to any server.
+            </div>
+
+            <!-- TOOL SELECTOR -->
+            <div class="tool-selector" id="toolSelector">
+                <button class="tool-tab active" data-tool="password-generator">
+                    <i class="fas fa-key"></i> Password Generator
+                </button>
+                <button class="tool-tab" data-tool="password-checker">
+                    <i class="fas fa-shield"></i> Strength Checker
+                </button>
+                <button class="tool-tab" data-tool="hash-generator">
+                    <i class="fas fa-fingerprint"></i> Hash Generator
+                </button>
+                <button class="tool-tab" data-tool="base64-encoder">
+                    <i class="fas fa-code"></i> Base64 Encode
+                </button>
+                <button class="tool-tab" data-tool="base64-decoder">
+                    <i class="fas fa-unlock"></i> Base64 Decode
+                </button>
+                <button class="tool-tab" data-tool="url-encoder">
+                    <i class="fas fa-link"></i> URL Encode
+                </button>
+                <button class="tool-tab" data-tool="url-decoder">
+                    <i class="fas fa-link-slash"></i> URL Decode
+                </button>
+                <button class="tool-tab" data-tool="json-formatter">
+                    <i class="fas fa-brackets-curly"></i> JSON Formatter
+                </button>
+                <button class="tool-tab" data-tool="whois-lookup">
+                    <i class="fas fa-globe"></i> WHOIS Lookup
+                </button>
+                <button class="tool-tab" data-tool="ip-lookup">
+                    <i class="fas fa-map-marker-alt"></i> IP Lookup
+                </button>
+            </div>
+
+            <!-- TOOL PANELS -->
+            <div class="tool-panels" id="toolPanels">
+                <!-- Password Generator -->
+                <div class="tool-panel active" id="panel-password-generator">
+                    <div class="panel">
+                        <h3><i class="fas fa-key"></i> Password Generator</h3>
+                        <p class="section-subtitle">// generate strong, random passwords</p>
+                        
+                        <div class="tool-controls">
+                            <div class="control-group">
+                                <label>Password Length: <span id="passLengthValue">16</span></label>
+                                <input type="range" id="passLength" min="8" max="64" value="16" />
+                            </div>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" id="includeUpper" checked /> Uppercase (A-Z)</label>
+                                <label><input type="checkbox" id="includeLower" checked /> Lowercase (a-z)</label>
+                                <label><input type="checkbox" id="includeNumbers" checked /> Numbers (0-9)</label>
+                                <label><input type="checkbox" id="includeSymbols" checked /> Symbols (!@#$%)</label>
+                            </div>
+                            <button class="btn-matrix" id="generatePassword">
+                                <i class="fas fa-sync-alt"></i> Generate
+                            </button>
+                        </div>
+                        
+                        <div class="tool-output">
+                            <input type="text" id="generatedPassword" readonly placeholder="Your password will appear here..." />
+                            <button class="btn-matrix btn-matrix-outline" id="copyPassword">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="password-strength" id="passwordStrengthBar" style="display: none;">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <p id="strengthText" style="font-size: 0.7rem; color: #88dd99; margin-top: 0.5rem;"></p>
+                    </div>
+                </div>
+
+                <!-- Password Strength Checker -->
+                <div class="tool-panel" id="panel-password-checker">
+                    <div class="panel">
+                        <h3><i class="fas fa-shield"></i> Password Strength Checker</h3>
+                        <p class="section-subtitle">// check how strong your password is (never sent to server)</p>
+                        
+                        <div class="tool-controls">
+                            <div class="control-group">
+                                <label>Enter a password to check:</label>
+                                <input type="text" id="passwordToCheck" placeholder="Type or paste a password..." />
+                            </div>
+                        </div>
+                        
+                        <div class="password-strength" id="checkStrengthBar" style="display: none;">
+                            <div class="strength-fill" id="checkStrengthFill"></div>
+                        </div>
+                        <p id="checkStrengthText" style="font-size: 0.75rem; color: #88dd99; margin-top: 0.5rem;"></p>
+                        <div id="checkDetails" style="font-size: 0.7rem; color: #66aa77; margin-top: 0.8rem; line-height: 1.8;"></div>
+                    </div>
+                </div>
+
+                <!-- Hash Generator -->
+                <div class="tool-panel" id="panel-hash-generator">
+                    <div class="panel">
+                        <h3><i class="fas fa-fingerprint"></i> Hash Generator</h3>
+                        <p class="section-subtitle">// generate cryptographic hashes (MD5, SHA-1, SHA-256, SHA-512)</p>
+                        
+                        <div class="tool-controls">
+                            <div class="control-group">
+                                <label>Input text:</label>
+                                <textarea id="hashInput" rows="3" placeholder="Enter text to hash..."></textarea>
+                            </div>
+                            <div class="control-group">
+                                <label>Algorithm:</label>
+                                <select id="hashAlgorithm">
+                                    <option value="SHA-256" selected>SHA-256 (Recommended)</option>
+                                    <option value="SHA-512">SHA-512</option>
+                                    <option value="SHA-1">SHA-1 (Legacy - Insecure)</option>
+                                    <option value="MD5">MD5 (Legacy - Insecure)</option>
+                                </select>
+                            </div>
+                            <button class="btn-matrix" id="generateHash">
+                                <i class="fas fa-cog"></i> Generate Hash
+                            </button>
+                        </div>
+                        
+                        <div class="tool-output">
+                            <input type="text" id="hashOutput" readonly placeholder="Hash will appear here..." />
+                            <button class="btn-matrix btn-matrix-outline" id="copyHash">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div id="hashWarning" style="display: none; margin-top: 0.5rem; padding: 0.5rem; background: rgba(255,50,50,0.15); border: 1px solid #ff4444; border-radius: 8px; font-size: 0.7rem; color: #ff7777;">
+                            <i class="fas fa-exclamation-triangle"></i> 
+                            <strong>Warning:</strong> MD5 and SHA-1 are cryptographically broken. Do not use for password hashing or security-critical applications.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Base64 Encoder -->
+                <div class="tool-panel" id="panel-base64-encoder">
+                    <div class="panel">
+                        <h3><i class="fas fa-code"></i> Base64 Encoder</h3>
+                        <p class="section-subtitle">// encode text to Base64</p>
+                        
+                        <div class="tool-controls">
+                            <div class="control-group">
+                                <label>Input text:</label>
+                                <textarea id="b64EncodeInput" rows="4" placeholder="Enter text to encode..."></textarea>
+                            </div>
+                            <button class="btn-matrix" id="encodeBase64">
+                                <i class="fas fa-arrow-right"></i> Encode
+                            </button>
+                        </div>
+                        
+                        <div class="tool-output">
+                            <textarea id="b64EncodeOutput" rows="4" readonly placeholder="Encoded output..."></textarea>
+                            <button class="btn-matrix btn-matrix-outline" id="copyB64Encoded">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Base64 Decoder -->
+                <div class="tool-panel" id="panel-base64-decoder">
+                    <div class="panel">
+                        <h3><i class="fas fa-unlock"></i> Base64 Decoder</h3>
+                        <p class="section-subtitle">// decode Base64 back to text</p>
+                        
+                        <div class="tool-controls">
+                            <div class="control-group">
+                                <label>Base64 input:</label>
+                                <textarea id="b64DecodeInput" rows="4" placeholder="Enter Base64 string to decode..."></textarea>
+                            </div>
+                            <button class="btn-matrix" id="decodeBase64">
+                                <i class="fas fa-arrow-left"></i> Decode
+                            </button>
+                        </div>
+                        
+                        <div class="tool-output">
+                            <textarea id="b64DecodeOutput" rows="4" readonly placeholder="Decoded output..."></textarea>
+                            <button class="btn-matrix btn-matrix-outline" id="copyB64Decoded">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- URL Encoder -->
+                <div class="tool-panel" id="panel-url-encoder">
+                    <div class="panel">
+                        <h3><i class="fas fa-link"></i> URL Encoder</h3>
+                        <p class="section-subtitle">// encode text for safe URL usage</p>
+                        
+                        <div class="tool-controls">
+                            <div class="control-group">
+                                <label>Input text:</label>
+                                <textarea id="urlEncodeInput" rows="3" placeholder="Enter text to URL-encode..."></textarea>
+                            </div>
+                            <button class="btn-matrix" id="encodeURL">
+                                <i class="fas fa-arrow-right"></i> Encode
+                            </button>
+                        </div>
+                        
+                        <div class="tool-output">
+                            <input type="text" id="urlEncodeOutput" readonly placeholder="Encoded URL..." />
+                            <button class="btn-matrix btn-matrix-outline" id="copyURLEncoded">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- URL Decoder -->
+                <div class="tool-panel" id="panel-url-decoder">
+                    <div class="panel">
+                        <h3><i class="fas fa-link-slash"></i> URL Decoder</h3>
+                        <p class="section-subtitle">// decode URL-encoded strings</p>
+                        
+                        <div class="tool-controls">
+                            <div class="control-group">
+                                <label>URL-encoded input:</label>
+                                <textarea id="urlDecodeInput" rows="3" placeholder="Enter URL-encoded string..."></textarea>
+                            </div>
+                            <button class="btn-matrix" id="decodeURL">
+                                <i class="fas fa-arrow-left"></i> Decode
+                            </button>
+                        </div>
+                        
+                        <div class="tool-output">
+                            <input type="text" id="urlDecodeOutput" readonly placeholder="Decoded URL..." />
+                            <button class="btn-matrix btn-matrix-outline" id="copyURLDecoded">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JSON Formatter -->
+                <div class="tool-panel" id="panel-json-formatter">
+                    <div class="panel">
+                        <h3><i class="fas fa-brackets-curly"></i> JSON Formatter</h3>
+                        <p class="section-subtitle">// format, validate, and beautify JSON</p>
+                        
+                        <div class="tool-controls">
+                            <div class="control-group">
+                                <label>Paste JSON:</label>
+                                <textarea id="jsonInput" rows="6" placeholder='{"key": "value"}'></textarea>
+                            </div>
+                            <div style="display: flex; gap: 0.8rem;">
+                                <button class="btn-matrix" id="formatJSON">
+                                    <i class="fas fa-magic"></i> Format / Beautify
+                                </button>
+                                <button class="btn-matrix btn-matrix-outline" id="minifyJSON">
+                                    <i class="fas fa-compress"></i> Minify
+                                </button>
+                                <button class="btn-matrix btn-matrix-outline" id="validateJSON">
+                                    <i class="fas fa-check-circle"></i> Validate
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-output">
+                            <textarea id="jsonOutput" rows="8" readonly placeholder="Formatted JSON..."></textarea>
+                            <button class="btn-matrix btn-matrix-outline" id="copyJSON">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <p id="jsonStatus" style="font-size: 0.7rem; margin-top: 0.5rem; min-height: 1.2rem;"></p>
+                    </div>
+                </div>
+
+                <!-- WHOIS Lookup -->
+                <div class="tool-panel" id="panel-whois-lookup">
+                    <div class="panel">
+                        <h3><i class="fas fa-globe"></i> WHOIS Lookup</h3>
+                        <p class="section-subtitle">// domain ownership information (requires backend)</p>
+                        
+                        <div class="tool-controls">
+                            <div class="control-group">
+                                <label>Domain name:</label>
+                                <input type="text" id="whoisDomain" placeholder="example.com" />
+                            </div>
+                            <button class="btn-matrix" id="lookupWhois">
+                                <i class="fas fa-search"></i> Lookup
+                            </button>
+                        </div>
+                        
+                        <div class="tool-output">
+                            <textarea id="whoisOutput" rows="8" readonly placeholder="WHOIS data will appear here... (Backend required)"></textarea>
+                        </div>
+                        <div id="whoisStatus" style="font-size: 0.7rem; color: #ffaa44; margin-top: 0.5rem;">
+                            <i class="fas fa-info-circle"></i> This feature requires a backend service. Currently in demo mode.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IP Lookup -->
+                <div class="tool-panel" id="panel-ip-lookup">
+                    <div class="panel">
+                        <h3><i class="fas fa-map-marker-alt"></i> IP Lookup</h3>
+                        <p class="section-subtitle">// IP address geolocation and information (requires backend)</p>
+                        
+                        <div class="tool-controls">
+                            <div class="control-group">
+                                <label>IP Address:</label>
+                                <input type="text" id="ipAddress" placeholder="8.8.8.8 or leave blank for your IP" />
+                            </div>
+                            <button class="btn-matrix" id="lookupIP">
+                                <i class="fas fa-search"></i> Lookup
+                            </button>
+                        </div>
+                        
+                        <div class="tool-output">
+                            <textarea id="ipOutput" rows="6" readonly placeholder="IP information will appear here... (Backend required)"></textarea>
+                        </div>
+                        <div id="ipStatus" style="font-size: 0.7rem; color: #ffaa44; margin-top: 0.5rem;">
+                            <i class="fas fa-info-circle"></i> This feature requires a backend service. Currently in demo mode.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/tools.js"></script>
+</body>
+</html>
+
+<style>
+    /* Tool selector tabs */
+    .tool-selector {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #1f7a33;
+    }
+
+    .tool-tab {
+        background: rgba(10, 50, 16, 0.3);
+        border: 1px solid #1f7a33;
+        color: #88dd99;
+        padding: 0.5rem 1.2rem;
+        border-radius: 40px;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: 'Share Tech Mono', monospace;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        white-space: nowrap;
+    }
+
+    .tool-tab i {
+        font-size: 0.7rem;
+        color: #44dd77;
+    }
+
+    .tool-tab:hover {
+        background: rgba(20, 80, 30, 0.5);
+        border-color: #3ad86a;
+        color: #ddffdd;
+        box-shadow: 0 0 12px rgba(34, 221, 102, 0.2);
+    }
+
+    .tool-tab.active {
+        background: linear-gradient(145deg, #0f3f1a, #0a2a12);
+        border-color: #3ad86a;
+        color: #eeffee;
+        box-shadow: 0 0 18px rgba(34, 221, 102, 0.3);
+    }
+
+    /* Tool panels */
+    .tool-panel {
+        display: none;
+        animation: fadeSlide 0.3s ease;
+    }
+
+    .tool-panel.active {
+        display: block;
+    }
+
+    .tool-controls {
+        margin-bottom: 1.5rem;
+    }
+
+    .control-group {
+        margin-bottom: 1.2rem;
+    }
+
+    .control-group label {
+        display: block;
+        font-size: 0.75rem;
+        color: #88dd99;
+        margin-bottom: 0.4rem;
+        letter-spacing: 1px;
+        text-shadow: 0 0 4px #00aa33;
+    }
+
+    .control-group input[type="text"],
+    .control-group input[type="email"],
+    .control-group textarea,
+    .control-group select {
+        width: 100%;
+        background: rgba(2, 15, 4, 0.8);
+        border: 1px solid #1f7a33;
+        border-radius: 12px;
+        padding: 0.7rem 1rem;
+        color: #ccffcc;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 0.85rem;
+        outline: none;
+        transition: border 0.2s, box-shadow 0.2s;
+    }
+
+    .control-group input:focus,
+    .control-group textarea:focus,
+    .control-group select:focus {
+        border-color: #3ad86a;
+        box-shadow: 0 0 15px rgba(0, 221, 85, 0.2), inset 0 0 10px rgba(0, 61, 26, 0.3);
+    }
+
+    .control-group select {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2388dd99' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+    }
+
+    .control-group select option {
+        background: #0a1a0a;
+        color: #ccffcc;
+    }
+
+    .control-group input[type="range"] {
+        width: 100%;
+        accent-color: #3ad86a;
+    }
+
+    .checkbox-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .checkbox-group label {
+        font-size: 0.75rem;
+        color: #88dd99;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        cursor: pointer;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+        accent-color: #3ad86a;
+    }
+
+    /* Tool output */
+    .tool-output {
+        display: flex;
+        gap: 0.8rem;
+        align-items: flex-start;
+    }
+
+    .tool-output input,
+    .tool-output textarea {
+        flex: 1;
+        background: rgba(2, 12, 4, 0.8);
+        border: 1px solid #1f7a33;
+        border-radius: 12px;
+        padding: 0.7rem 1rem;
+        color: #ccffcc;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 0.85rem;
+        outline: none;
+        resize: vertical;
+    }
+
+    .tool-output input:focus,
+    .tool-output textarea:focus {
+        border-color: #3ad86a;
+        box-shadow: 0 0 10px rgba(0, 221, 85, 0.15);
+    }
+
+    /* Password strength bar */
+    .password-strength {
+        height: 6px;
+        background: rgba(31, 122, 51, 0.3);
+        border-radius: 3px;
+        margin-top: 0.8rem;
+        overflow: hidden;
+    }
+
+    .strength-fill {
+        height: 100%;
+        border-radius: 3px;
+        transition: width 0.3s ease, background 0.3s ease;
+    }
+
+    /* Copy feedback */
+    .copied-feedback {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: #0f3f1a;
+        border: 1px solid #3ad86a;
+        color: #ddffdd;
+        padding: 0.6rem 1.2rem;
+        border-radius: 40px;
+        font-size: 0.75rem;
+        z-index: 300;
+        animation: fadeSlide 0.3s ease;
+        font-family: 'Share Tech Mono', monospace;
+    }
+
+    @media (max-width: 768px) {
+        .tool-selector {
+            gap: 0.3rem;
+        }
+        .tool-tab {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.7rem;
+        }
+        .tool-output {
+            flex-direction: column;
+        }
+        .checkbox-group {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+</style>

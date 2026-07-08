@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — CyberMatrix</title>
+    <meta name="description" content="Get in touch with the CyberMatrix team. Report vulnerabilities, suggest features, or ask questions." />
+    <link rel="stylesheet" href="assets/css/matrix-theme.css" />
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="section-title"><i class="fas fa-envelope"></i> Contact Us</h1>
+            <p class="section-subtitle">// establish a secure connection</p>
+
+            <div class="grid-2">
+                <!-- Contact Form -->
+                <div class="panel">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+                        <i class="fas fa-paper-plane"></i> Send a Message
+                    </h3>
+                    <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                        <div class="control-group">
+                            <label for="contactName">Name</label>
+                            <div class="input-wrap-local">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="contactName" placeholder="Your name" required />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="contactEmail">Email</label>
+                            <div class="input-wrap-local">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="contactEmail" placeholder="your@email.com" required />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="contactSubject">Subject</label>
+                            <div class="input-wrap-local">
+                                <i class="fas fa-tag"></i>
+                                <select id="contactSubject" required>
+                                    <option value="">Select a topic...</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="bug">Report a Bug</option>
+                                    <option value="feature">Feature Request</option>
+                                    <option value="security">Security Vulnerability</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="contactMessage">Message</label>
+                            <textarea id="contactMessage" rows="5" placeholder="Your message..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-matrix" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                    <div id="contactSuccess" style="display: none; text-align: center; padding: 2rem;">
+                        <i class="fas fa-check-circle" style="font-size: 3rem; color: #27c93f; display: block; margin-bottom: 1rem;"></i>
+                        <h3>Message Sent!</h3>
+                        <p style="color: #88dd99;">We'll get back to you within 48 hours.</p>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <div class="panel" style="margin-bottom: 1.5rem;">
+                        <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">
+                            <i class="fas fa-info-circle"></i> Contact Information
+                        </h3>
+                        <div class="contact-info-list">
+                            <div class="contact-info-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <strong>Email</strong>
+                                    <p>security@cybermatrix.demo</p>
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <i class="fas fa-shield"></i>
+                                <div>
+                                    <strong>Security Issues</strong>
+                                    <p>security@cybermatrix.demo</p>
+                                    <p style="font-size: 0.65rem; color: #ffaa44; margin-top: 0.3rem;">
+                                        <i class="fas fa-key"></i> PGP key available on request
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <strong>Response Time</strong>
+                                    <p>Within 48 hours</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Quick Links -->
+                    <div class="panel">
+                        <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">
+                            <i class="fas fa-question-circle"></i> Quick Answers
+                        </h3>
+                        <div id="contactFaq">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/contact.js"></script>
+</body>
+</html>
+
+<style>
+    .control-group {
+        margin-bottom: 1.2rem;
+    }
+    .control-group label {
+        display: block;
+        font-size: 0.7rem;
+        color: #88dd99;
+        letter-spacing: 1.5px;
+        margin-bottom: 0.4rem;
+        text-shadow: 0 0 4px #00aa33;
+    }
+    .input-wrap-local {
+        display: flex;
+        align-items: center;
+        background: rgba(2, 15, 4, 0.8);
+        border-radius: 12px;
+        border: 1px solid #1f7a33;
+        padding: 0.1rem 0.1rem 0.1rem 1rem;
+        transition: border 0.2s, box-shadow 0.2s;
+    }
+    .input-wrap-local:focus-within {
+        border-color: #3ad86a;
+        box-shadow: 0 0 15px rgba(0, 221, 85, 0.2);
+    }
+    .input-wrap-local i {
+        color: #44dd77;
+        font-size: 0.8rem;
+        margin-right: 0.5rem;
+    }
+    .input-wrap-local input,
+    .input-wrap-local select,
+    .control-group textarea {
+        flex: 1;
+        background: transparent;
+        border: none;
+        padding: 0.7rem 0.4rem;
+        font-size: 0.85rem;
+        color: #ccffcc;
+        font-family: 'Share Tech Mono', monospace;
+        outline: none;
+        letter-spacing: 0.5px;
+        width: 100%;
+    }
+    .control-group textarea {
+        background: rgba(2, 15, 4, 0.8);
+        border: 1px solid #1f7a33;
+        border-radius: 12px;
+        padding: 0.8rem 1rem;
+        resize: vertical;
+    }
+    .control-group textarea:focus {
+        border-color: #3ad86a;
+        box-shadow: 0 0 15px rgba(0, 221, 85, 0.2);
+    }
+    .input-wrap-local select {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2388dd99' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+    }
+    .input-wrap-local select option {
+        background: #0a1a0a;
+        color: #ccffcc;
+    }
+    input::placeholder,
+    textarea::placeholder {
+        color: #448855;
+    }
+
+    /* Contact info */
+    .contact-info-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .contact-info-item {
+        display: flex;
+        gap: 0.8rem;
+        align-items: flex-start;
+    }
+    .contact-info-item i {
+        color: #44dd77;
+        font-size: 1rem;
+        margin-top: 0.2rem;
+        width: 20px;
+        text-align: center;
+    }
+    .contact-info-item strong {
+        display: block;
+        font-size: 0.8rem;
+        color: #aaffaa;
+        margin-bottom: 0.2rem;
+    }
+    .contact-info-item p {
+        font-size: 0.75rem;
+        color: #88bb99;
+    }
+
+    /* FAQ in contact */
+    .faq-mini-item {
+        padding: 0.6rem 0;
+        border-bottom: 1px solid rgba(31, 122, 51, 0.3);
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    .faq-mini-item:last-child {
+        border-bottom: none;
+    }
+    .faq-mini-item .faq-mini-q {
+        font-size: 0.8rem;
+        color: #88dd99;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .faq-mini-item .faq-mini-a {
+        font-size: 0.7rem;
+        color: #66aa77;
+        margin-top: 0.4rem;
+        display: none;
+        line-height: 1.6;
+    }
+    .faq-mini-item.open .faq-mini-a {
+        display: block;
+    }
+    .faq-mini-item:hover {
+        color: #ddffdd;
+    }
+    .faq-mini-item i {
+        font-size: 0.6rem;
+        transition: transform 0.2s ease;
+    }
+    .faq-mini-item.open i {
+        transform: rotate(180deg);
+    }
+</style>

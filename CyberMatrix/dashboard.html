@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — CyberMatrix</title>
+    <meta name="description" content="Your CyberMatrix dashboard — saved articles, bookmarks, profile, and settings." />
+    <link rel="stylesheet" href="assets/css/matrix-theme.css" />
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <section class="section">
+        <div class="container">
+            <div class="dashboard-layout">
+                <!-- SIDEBAR -->
+                <aside class="dash-sidebar">
+                    <div class="dash-user-info">
+                        <div class="dash-avatar">
+                            <i class="fas fa-user-astronaut"></i>
+                        </div>
+                        <h4>admin123</h4>
+                        <span class="badge">Member</span>
+                    </div>
+                    <nav class="dash-nav">
+                        <a href="#" class="dash-nav-item active" data-section="overview">
+                            <i class="fas fa-th-large"></i> Overview
+                        </a>
+                        <a href="#" class="dash-nav-item" data-section="saved">
+                            <i class="fas fa-bookmark"></i> Saved Articles
+                        </a>
+                        <a href="#" class="dash-nav-item" data-section="bookmarks">
+                            <i class="fas fa-star"></i> Bookmarks
+                        </a>
+                        <a href="#" class="dash-nav-item" data-section="profile">
+                            <i class="fas fa-user-circle"></i> Profile
+                        </a>
+                        <a href="#" class="dash-nav-item" data-section="settings">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                        <a href="login.html" class="dash-nav-item" style="color: #ff7777;">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- MAIN CONTENT -->
+                <main class="dash-content">
+                    <!-- Overview -->
+                    <div class="dash-section active" id="section-overview">
+                        <h2><i class="fas fa-th-large"></i> Dashboard Overview</h2>
+                        <p class="section-subtitle">// welcome back, admin123</p>
+
+                        <div class="grid-3" style="margin-bottom: 2rem;">
+                            <div class="card">
+                                <div class="card-icon"><i class="fas fa-bookmark"></i></div>
+                                <h3 class="card-title">Saved Articles</h3>
+                                <p class="card-text" style="font-size: 2rem; color: #3ddf6a;">3</p>
+                            </div>
+                            <div class="card">
+                                <div class="card-icon"><i class="fas fa-star"></i></div>
+                                <h3 class="card-title">Bookmarks</h3>
+                                <p class="card-text" style="font-size: 2rem; color: #3ddf6a;">5</p>
+                            </div>
+                            <div class="card">
+                                <div class="card-icon"><i class="fas fa-clock"></i></div>
+                                <h3 class="card-title">Last Active</h3>
+                                <p class="card-text" style="font-size: 1rem; color: #88dd99;">Today</p>
+                            </div>
+                        </div>
+
+                        <div class="panel">
+                            <h3 style="font-size: 1rem; margin-bottom: 1rem;">
+                                <i class="fas fa-chart-line"></i> Recent Activity
+                            </h3>
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <i class="fas fa-bookmark" style="color: #44dd77;"></i>
+                                    <span>Saved "Understanding Zero Trust Architecture"</span>
+                                    <span class="activity-time">2 hours ago</span>
+                                </div>
+                                <div class="activity-item">
+                                    <i class="fas fa-star" style="color: #ffd700;"></i>
+                                    <span>Bookmarked "Ransomware Response Playbook"</span>
+                                    <span class="activity-time">Yesterday</span>
+                                </div>
+                                <div class="activity-item">
+                                    <i class="fas fa-tools" style="color: #44dd77;"></i>
+                                    <span>Used Password Generator tool</span>
+                                    <span class="activity-time">2 days ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Saved Articles -->
+                    <div class="dash-section" id="section-saved">
+                        <h2><i class="fas fa-bookmark"></i> Saved Articles</h2>
+                        <p class="section-subtitle">// articles you've saved for later</p>
+                        <div class="grid-2">
+                            <div class="card">
+                                <span class="article-category">Defense</span>
+                                <h3 class="card-title">Understanding Zero Trust Architecture</h3>
+                                <p class="card-text">Zero Trust is not a product but a security philosophy...</p>
+                                <button class="btn-matrix btn-matrix-outline" style="margin-top: 0.8rem; padding: 0.3rem 0.8rem; font-size: 0.7rem;">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+                            <div class="card">
+                                <span class="article-category">Incident Response</span>
+                                <h3 class="card-title">Ransomware Response Playbook</h3>
+                                <p class="card-text">A step-by-step guide for organizations to prepare...</p>
+                                <button class="btn-matrix btn-matrix-outline" style="margin-top: 0.8rem; padding: 0.3rem 0.8rem; font-size: 0.7rem;">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bookmarks -->
+                    <div class="dash-section" id="section-bookmarks">
+                        <h2><i class="fas fa-star"></i> Bookmarks</h2>
+                        <p class="section-subtitle">// your bookmarked resources</p>
+                        <div class="card" style="margin-bottom: 0.8rem;">
+                            <h3 class="card-title">Password Generator Tool</h3>
+                            <p class="card-text">Quick access to generate strong passwords.</p>
+                            <a href="tools.html" class="btn-matrix btn-matrix-outline" style="margin-top: 0.5rem; padding: 0.3rem 0.8rem; font-size: 0.7rem;">
+                                <i class="fas fa-external-link-alt"></i> Open
+                            </a>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">Threat Intelligence - Ransomware</h3>
+                            <p class="card-text">Detailed analysis of ransomware threats.</p>
+                            <a href="threats.html" class="btn-matrix btn-matrix-outline" style="margin-top: 0.5rem; padding: 0.3rem 0.8rem; font-size: 0.7rem;">
+                                <i class="fas fa-external-link-alt"></i> Open
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Profile -->
+                    <div class="dash-section" id="section-profile">
+                        <h2><i class="fas fa-user-circle"></i> Profile</h2>
+                        <p class="section-subtitle">// manage your account</p>
+                        <div class="panel">
+                            <div style="text-align: center; margin-bottom: 2rem;">
+                                <div class="dash-avatar" style="width: 80px; height: 80px; margin: 0 auto; font-size: 2rem;">
+                                    <i class="fas fa-user-astronaut"></i>
+                                </div>
+                                <h3 style="margin-top: 0.8rem;">admin123</h3>
+                                <p style="color: #88dd99; font-size: 0.8rem;">Member since July 2026</p>
+                            </div>
+                            <div class="profile-details">
+                                <div class="profile-row">
+                                    <span>Username:</span>
+                                    <span>admin123</span>
+                                </div>
+                                <div class="profile-row">
+                                    <span>Email:</span>
+                                    <span>admin@cybermatrix.demo</span>
+                                </div>
+                                <div class="profile-row">
+                                    <span>Role:</span>
+                                    <span class="badge">Member</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings -->
+                    <div class="dash-section" id="section-settings">
+                        <h2><i class="fas fa-cog"></i> Settings</h2>
+                        <p class="section-subtitle">// customize your experience</p>
+                        <div class="panel">
+                            <div class="settings-group">
+                                <h4>Notifications</h4>
+                                <label class="toggle-label">
+                                    <span>Email notifications for new threats</span>
+                                    <input type="checkbox" checked />
+                                </label>
+                                <label class="toggle-label">
+                                    <span>Weekly newsletter digest</span>
+                                    <input type="checkbox" checked />
+                                </label>
+                                <label class="toggle-label">
+                                    <span>Security alert notifications</span>
+                                    <input type="checkbox" checked />
+                                </label>
+                            </div>
+                            <div class="settings-group">
+                                <h4>Appearance</h4>
+                                <label class="toggle-label">
+                                    <span>Matrix theme (default)</span>
+                                    <input type="checkbox" checked />
+                                </label>
+                                <label class="toggle-label">
+                                    <span>Reduced animations</span>
+                                    <input type="checkbox" />
+                                </label>
+                            </div>
+                            <button class="btn-matrix" style="margin-top: 1rem;">
+                                <i class="fas fa-save"></i> Save Settings
+                            </button>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+    <script src="assets/js/navbar.js"></script>
+    <script>
+        // Dashboard sidebar navigation
+        document.querySelectorAll('.dash-nav-item[data-section]').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update active nav
+                document.querySelectorAll('.dash-nav-item').forEach(n => n.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show corresponding section
+                const sectionId = 'section-' + this.dataset.section;
+                document.querySelectorAll('.dash-section').forEach(s => s.classList.remove('active'));
+                document.getElementById(sectionId)?.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
+
+<style>
+    .dashboard-layout {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 2rem;
+    }
+
+    .dash-sidebar {
+        background: var(--bg-panel-alt);
+        border: 1px solid var(--border-primary);
+        border-radius: 1.5rem;
+        padding: 1.5rem 1rem;
+        box-shadow: inset 0 0 20px rgba(0, 61, 26, 0.2);
+        height: fit-content;
+        position: sticky;
+        top: 80px;
+    }
+
+    .dash-user-info {
+        text-align: center;
+        padding-bottom: 1.2rem;
+        border-bottom: 1px solid #1f7a33;
+        margin-bottom: 1rem;
+    }
+
+    .dash-avatar {
+        width: 55px;
+        height: 55px;
+        background: rgba(15, 63, 26, 0.5);
+        border: 2px solid #2aac4a;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: #3ddf6a;
+        margin: 0 auto 0.8rem;
+    }
+
+    .dash-user-info h4 {
+        font-size: 0.9rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .dash-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+
+    .dash-nav-item {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0.6rem 0.8rem;
+        border-radius: 10px;
+        font-size: 0.8rem;
+        color: #88dd99;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: 1px solid transparent;
+    }
+
+    .dash-nav-item i {
+        width: 18px;
+        color: #44dd77;
+        font-size: 0.8rem;
+    }
+
+    .dash-nav-item:hover {
+        background: rgba(15, 47, 26, 0.6);
+        border-color: #2aac4a;
+        color: #ddffdd;
+    }
+
+    .dash-nav-item.active {
+        background: rgba(15, 55, 26, 0.7);
+        border-color: #3ad86a;
+        color: #eeffee;
+        box-shadow: 0 0 12px rgba(0, 221, 85, 0.2);
+    }
+
+    .dash-content {
+        min-height: 400px;
+    }
+
+    .dash-section {
+        display: none;
+        animation: fadeSlide 0.3s ease;
+    }
+
+    .dash-section.active {
+        display: block;
+    }
+
+    .article-category {
+        display: inline-block;
+        font-size: 0.6rem;
+        color: #66dd88;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+        padding: 0.2rem 0.6rem;
+        background: rgba(0, 60, 20, 0.4);
+        border-radius: 40px;
+        border: 1px solid #1f7a33;
+    }
+
+    /* Activity list */
+    .activity-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .activity-item {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        font-size: 0.8rem;
+        color: #88bb99;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(31, 122, 51, 0.2);
+    }
+
+    .activity-item:last-child {
+        border-bottom: none;
+    }
+
+    .activity-time {
+        margin-left: auto;
+        font-size: 0.65rem;
+        color: #66aa77;
+        white-space: nowrap;
+    }
+
+    /* Profile */
+    .profile-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .profile-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(31, 122, 51, 0.2);
+        font-size: 0.8rem;
+        color: #88bb99;
+    }
+
+    /* Settings */
+    .settings-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .settings-group h4 {
+        font-size: 0.85rem;
+        color: #aaffaa;
+        margin-bottom: 0.8rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(31, 122, 51, 0.3);
+    }
+
+    .toggle-label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        font-size: 0.8rem;
+        color: #88dd99;
+        cursor: pointer;
+    }
+
+    .toggle-label input[type="checkbox"] {
+        accent-color: #3ad86a;
+        width: 16px;
+        height: 16px;
+    }
+
+    @media (max-width: 768px) {
+        .dashboard-layout {
+            grid-template-columns: 1fr;
+        }
+        .dash-sidebar {
+            position: static;
+        }
+        .dash-nav {
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .dash-nav-item {
+            font-size: 0.7rem;
+            padding: 0.4rem 0.6rem;
+        }
+    }
+</style>

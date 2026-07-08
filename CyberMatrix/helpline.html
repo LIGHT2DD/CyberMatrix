@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Helpline — CyberMatrix</title>
+    <meta name="description" content="CyberMatrix AI Helpline — Ask cybersecurity questions, upload screenshots for analysis, and import audio for transcription." />
+    <link rel="stylesheet" href="assets/css/matrix-theme.css" />
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <!-- MAIN APP — visible immediately, no login gate -->
+    <div class="app-container" id="appContainer">
+        <section class="section" style="padding: 1.5rem 0;">
+            <div class="container">
+                <div class="helpline-layout">
+                    <!-- SIDEBAR -->
+                    <aside class="hl-sidebar">
+                        <div class="hl-sidebar-header">
+                            <h4><i class="fas fa-folder-tree"></i> MATRIX</h4>
+                        </div>
+                        <nav class="hl-nav">
+                            <a href="#" class="hl-nav-item active" data-topic="all">
+                                <i class="fas fa-compass"></i> All Topics
+                            </a>
+                            <a href="#" class="hl-nav-item" data-topic="threats">
+                                <i class="fas fa-skull"></i> Threats
+                            </a>
+                            <a href="#" class="hl-nav-item" data-topic="defense">
+                                <i class="fas fa-shield"></i> Defense
+                            </a>
+                            <a href="#" class="hl-nav-item" data-topic="identity">
+                                <i class="fas fa-id-card"></i> Identity
+                            </a>
+                            <a href="#" class="hl-nav-item" data-topic="network">
+                                <i class="fas fa-network-wired"></i> Network
+                            </a>
+                            <a href="#" class="hl-nav-item" data-topic="cloud">
+                                <i class="fas fa-cloud"></i> Cloud
+                            </a>
+                            <a href="#" class="hl-nav-item" data-topic="incident">
+                                <i class="fas fa-triangle-exclamation"></i> IR
+                            </a>
+                            <a href="#" class="hl-nav-item" data-topic="awareness">
+                                <i class="fas fa-users"></i> Awareness
+                            </a>
+                        </nav>
+                        <div class="hl-sidebar-footer">
+                            <button class="btn-matrix btn-matrix-outline" id="exportChat" style="width: 100%; font-size: 0.7rem; padding: 0.5rem;">
+                                <i class="fas fa-download"></i> Export Chat
+                            </button>
+                            <button class="btn-matrix btn-matrix-outline" id="clearChat" style="width: 100%; font-size: 0.7rem; padding: 0.5rem; margin-top: 0.4rem; border-color: #8a3a3a; color: #ff9999;">
+                                <i class="fas fa-trash"></i> Clear Chat
+                            </button>
+                            <a href="dashboard.html" class="btn-matrix btn-matrix-outline" style="width: 100%; font-size: 0.7rem; padding: 0.5rem; margin-top: 0.4rem; text-align: center; text-decoration: none; display: block;">
+                                <i class="fas fa-user"></i> Dashboard
+                            </a>
+                        </div>
+                    </aside>
+
+                    <!-- MAIN CHAT AREA -->
+                    <main class="hl-main">
+                        <!-- Header -->
+                        <div class="hl-header">
+                            <div class="hl-brand">
+                                <i class="fas fa-shield-halved"></i>
+                                <h1>CyberMatrix</h1>
+                            </div>
+                            <div class="hl-badges">
+                                <span class="badge">
+                                    <i class="fas fa-circle" style="color: #66ff88; font-size: 0.45rem;"></i> Helpline v3.0
+                                </span>
+                                <span class="badge" id="connectionStatus">
+                                    <i class="fas fa-circle" style="color: #66ff88; font-size: 0.45rem;"></i> Connected
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Chat Window -->
+                        <div class="hl-chat-window" id="chatWindow">
+                            <div id="messageContainer">
+                                <div class="message bot">
+                                    <div class="avatar"><i class="fas fa-robot"></i></div>
+                                    <div class="bubble">
+                                        <strong>🔰 MATRIX SECURITY HELPLINE</strong><br />
+                                        I'm your AI cybersecurity assistant. I can analyze security concerns, explain threats, and now — 
+                                        <strong>analyze uploaded screenshots</strong> and <strong>transcribe audio</strong>.
+                                        <br /><br />
+                                        <span style="font-size: 0.75rem; opacity: 0.85;">
+                                            📸 <strong>Image:</strong> Upload screenshots of suspicious emails, alerts, or settings<br />
+                                            🎤 <strong>Audio:</strong> Import audio files or use your microphone for voice input<br />
+                                            💬 <strong>Chat:</strong> Type any cybersecurity question
+                                        </span>
+                                        <span class="timestamp">⏱️ online</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="typing-indicator" id="typingIndicator">
+                                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                                <span>processing...</span>
+                            </div>
+                        </div>
+
+                        <!-- Input Area -->
+                        <div class="hl-input-area">
+                            <!-- File preview bar -->
+                            <div class="file-preview-bar" id="filePreviewBar" style="display: none;">
+                                <div id="filePreviewContent"></div>
+                                <button class="file-preview-close" id="clearFilePreview">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+
+                            <!-- Input box -->
+                            <div class="hl-input-box">
+                                <!-- File import buttons -->
+                                <div class="input-actions-left">
+                                    <button class="input-action-btn" id="imageUploadBtn" title="Upload Image for Analysis (Ctrl+Shift+I)">
+                                        <i class="fas fa-image"></i>
+                                    </button>
+                                    <button class="input-action-btn" id="audioUploadBtn" title="Import Audio File">
+                                        <i class="fas fa-file-audio"></i>
+                                    </button>
+                                    <!-- Mic button added by JS -->
+                                </div>
+                                <input type="file" id="imageFileInput" accept="image/*" style="display: none;" />
+                                <input type="file" id="audioFileInput" accept="audio/*" style="display: none;" />
+
+                                <!-- Text input -->
+                                <input type="text" id="searchInput" placeholder="> enter query, upload file, or use mic..." autofocus />
+                                
+                                <!-- Send button -->
+                                <button class="input-send-btn" id="sendBtn">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+
+                            <!-- Quick tags -->
+                            <div class="hl-quick-tags" id="quickTags">
+                                <span class="tag" data-query="phishing"><i class="fas fa-fish"></i> Phishing</span>
+                                <span class="tag" data-query="ransomware"><i class="fas fa-skull"></i> Ransomware</span>
+                                <span class="tag" data-query="MFA"><i class="fas fa-key"></i> MFA</span>
+                                <span class="tag" data-query="CVE vulnerability"><i class="fas fa-bug"></i> CVE</span>
+                                <span class="tag" data-query="zero-day"><i class="fas fa-biohazard"></i> Zero-day</span>
+                                <span class="tag" data-query="firewall"><i class="fas fa-firewall"></i> Firewall</span>
+                                <span class="tag" data-query="zero trust"><i class="fas fa-lock"></i> Zero Trust</span>
+                                <span class="tag" data-query="cloud security"><i class="fas fa-cloud"></i> Cloud</span>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- IMAGE VIEWER MODAL -->
+    <div class="modal-overlay" id="imageModal" style="display: none;">
+        <div class="modal-content panel" style="max-width: 800px;">
+            <button class="modal-close" id="closeImageModal">&times;</button>
+            <h3><i class="fas fa-image"></i> Image Viewer</h3>
+            <div id="imageModalContent" style="text-align: center; margin-top: 1rem;">
+                <img id="modalImagePreview" src="" alt="Full size preview" style="max-width: 100%; max-height: 70vh; border-radius: 12px; border: 1px solid #1f7a33;" />
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast" id="toast" style="display: none;"></div>
+
+    <div id="footer-container"></div>
+
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/helpline.js"></script>
+</body>
+</html>
+
+<style>
+    /* ===== LAYOUT ===== */
+    .helpline-layout {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 1.5rem;
+        min-height: 75vh;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .hl-sidebar {
+        background: var(--bg-panel-alt);
+        border: 1px solid var(--border-primary);
+        border-radius: 1.5rem;
+        padding: 1.2rem 0.8rem;
+        box-shadow: inset 0 0 20px rgba(0, 61, 26, 0.2);
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+        position: sticky;
+        top: 80px;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+    }
+
+    .hl-sidebar::-webkit-scrollbar { width: 4px; }
+    .hl-sidebar::-webkit-scrollbar-thumb { background: #2aac4a; border-radius: 12px; }
+
+    .hl-sidebar-header {
+        padding: 0 0.4rem 0.8rem;
+        border-bottom: 1px solid #1f7a33;
+        margin-bottom: 0.8rem;
+    }
+
+    .hl-sidebar-header h4 {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #66dd88;
+    }
+
+    .hl-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+        flex: 1;
+    }
+
+    .hl-nav-item {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0.5rem 0.7rem;
+        border-radius: 10px;
+        font-size: 0.75rem;
+        color: #88dd99;
+        text-decoration: none;
+        transition: all 0.15s ease;
+        border: 1px solid transparent;
+    }
+
+    .hl-nav-item i {
+        width: 18px;
+        color: #44dd77;
+        font-size: 0.8rem;
+        text-align: center;
+    }
+
+    .hl-nav-item:hover {
+        background: rgba(15, 47, 26, 0.6);
+        border-color: #2aac4a;
+        color: #ddffdd;
+        transform: translateX(3px);
+    }
+
+    .hl-nav-item.active {
+        background: rgba(15, 55, 26, 0.7);
+        border-color: #3ad86a;
+        color: #eeffee;
+        box-shadow: 0 0 12px rgba(0, 221, 85, 0.2);
+    }
+
+    .hl-sidebar-footer {
+        margin-top: auto;
+        padding-top: 0.8rem;
+        border-top: 1px solid #1f7a33;
+    }
+
+    /* ===== MAIN ===== */
+    .hl-main {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .hl-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    .hl-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    .hl-brand i {
+        font-size: 1.6rem;
+        color: #3ddf6a;
+        filter: drop-shadow(0 0 15px #22dd66);
+    }
+
+    .hl-brand h1 {
+        font-size: 1.4rem;
+        font-weight: 400;
+        letter-spacing: 2px;
+        color: #aaffaa;
+        text-shadow: 0 0 16px #22dd66, 0 0 40px #22aa44;
+    }
+
+    .hl-badges {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: rgba(0, 60, 20, 0.5);
+        padding: 0.25rem 1rem;
+        border-radius: 40px;
+        font-size: 0.65rem;
+        color: #88dd99;
+        border: 1px solid #2aac4a;
+        letter-spacing: 1px;
+        text-shadow: 0 0 6px #00cc44;
+    }
+
+    /* ===== CHAT WINDOW ===== */
+    .hl-chat-window {
+        flex: 1;
+        background: rgba(2, 12, 4, 0.85);
+        border-radius: 1.5rem;
+        padding: 1rem 1rem 0.5rem;
+        min-height: 400px;
+        max-height: 500px;
+        overflow-y: auto;
+        border: 1px solid #1f7a33;
+        box-shadow: inset 0 0 30px rgba(0, 51, 26, 0.2), 0 0 20px rgba(0, 170, 51, 0.07);
+        scroll-behavior: smooth;
+    }
+
+    .hl-chat-window::-webkit-scrollbar { width: 5px; }
+    .hl-chat-window::-webkit-scrollbar-track { background: #051005; }
+    .hl-chat-window::-webkit-scrollbar-thumb { background: #2aac4a; border-radius: 12px; }
+
+    /* Messages */
+    .message {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.7rem;
+        margin-bottom: 1rem;
+        animation: fadeSlide 0.3s ease;
+    }
+
+    .message .avatar {
+        width: 36px;
+        height: 36px;
+        background: #0b1f0f;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 0.85rem;
+        color: #88dd99;
+        border: 1px solid #2aac4a;
+        box-shadow: 0 0 10px rgba(0, 170, 51, 0.13);
+    }
+
+    .message.user .avatar {
+        background: #0f2a14;
+        border-color: #3ad86a;
+    }
+
+    .message.bot .avatar {
+        background: #081f0c;
+        border-color: #2aac4a;
+    }
+
+    .bubble {
+        background: rgba(8, 30, 12, 0.8);
+        padding: 0.7rem 1.2rem;
+        border-radius: 18px 18px 18px 4px;
+        max-width: 85%;
+        line-height: 1.7;
+        font-size: 0.85rem;
+        border: 1px solid #1f7a33;
+        box-shadow: 0 2px 12px rgba(0, 20, 0, 0.6);
+        word-break: break-word;
+        color: #bbffbb;
+        text-shadow: 0 0 4px #22aa44;
+    }
+
+    .message.user .bubble {
+        background: #0c2a14;
+        border-radius: 18px 18px 4px 18px;
+        border-color: #3ad86a;
+        color: #ddffdd;
+        text-shadow: 0 0 6px #33dd66;
+    }
+
+    .bubble strong { 
+        color: #88ff99; 
+        text-shadow: 0 0 10px #44dd66;
+    }
+
+    .bubble img.bubble-image {
+        max-width: 100%;
+        max-height: 250px;
+        border-radius: 12px;
+        margin: 0.5rem 0;
+        border: 1px solid #2aac4a;
+        cursor: pointer;
+    }
+
+    .bubble a {
+        color: #44dd77;
+        text-decoration: underline;
+    }
+
+    .timestamp {
+        font-size: 0.55rem;
+        opacity: 0.6;
+        margin-top: 0.3rem;
+        display: block;
+        color: #88dd99;
+    }
+
+    /* Typing indicator */
+    .typing-indicator {
+        display: none;
+        align-items: center;
+        gap: 0.6rem;
+        margin: 0.1rem 0 0.6rem 0.8rem;
+        font-size: 0.65rem;
+        color: #66dd88;
+    }
+
+    .typing-indicator .dot {
+        width: 8px;
+        height: 8px;
+        background: #44dd77;
+        border-radius: 50%;
+        animation: pulseDot 1.4s infinite both;
+        box-shadow: 0 0 12px #33dd66;
+    }
+
+    .typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes pulseDot {
+        0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+        40% { opacity: 1; transform: scale(1.1); }
+    }
+
+    @keyframes fadeSlide {
+        0% { opacity: 0; transform: translateY(6px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== INPUT AREA ===== */
+    .hl-input-area {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    /* File preview bar */
+    .file-preview-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        background: rgba(10, 50, 16, 0.5);
+        border: 1px solid #2aac4a;
+        border-radius: 12px;
+        padding: 0.6rem 1rem;
+        animation: fadeSlide 0.3s ease;
+    }
+
+    #filePreviewContent {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.75rem;
+        color: #88dd99;
+    }
+
+    #filePreviewContent img {
+        max-height: 45px;
+        border-radius: 8px;
+        border: 1px solid #1f7a33;
+    }
+
+    #filePreviewContent audio {
+        height: 30px;
+    }
+
+    .file-preview-close {
+        background: rgba(255, 50, 50, 0.2);
+        border: 1px solid #ff4444;
+        color: #ff7777;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        transition: all 0.2s;
+        flex-shrink: 0;
+    }
+
+    .file-preview-close:hover {
+        background: rgba(255, 50, 50, 0.4);
+        box-shadow: 0 0 12px rgba(255, 50, 50, 0.3);
+    }
+
+    /* Input box */
+    .hl-input-box {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: rgba(2, 15, 4, 0.8);
+        padding: 0.3rem 0.3rem 0.3rem 0.6rem;
+        border-radius: 60px;
+        border: 1px solid #1f7a33;
+        backdrop-filter: blur(4px);
+        transition: border 0.2s, box-shadow 0.2s;
+    }
+
+    .hl-input-box:focus-within {
+        border-color: #3ad86a;
+        box-shadow: 0 0 0 2px rgba(42, 172, 74, 0.33), 0 0 25px rgba(0, 221, 85, 0.2);
+    }
+
+    .input-actions-left {
+        display: flex;
+        gap: 0.3rem;
+    }
+
+    .input-action-btn {
+        background: rgba(15, 63, 26, 0.3);
+        border: 1px solid #1f7a33;
+        color: #88dd99;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        font-size: 0.85rem;
+    }
+
+    .input-action-btn:hover {
+        background: rgba(20, 80, 30, 0.5);
+        border-color: #3ad86a;
+        color: #ddffdd;
+        box-shadow: 0 0 15px rgba(34, 221, 102, 0.2);
+    }
+
+    .input-action-btn.active-tool {
+        background: rgba(15, 63, 26, 0.6);
+        border-color: #3ad86a;
+        color: #eeffee;
+        box-shadow: 0 0 15px rgba(34, 221, 102, 0.3);
+    }
+
+    .input-action-btn.recording {
+        background: rgba(255, 50, 50, 0.3);
+        border-color: #ff4444;
+        color: #ff7777;
+        animation: pulseGlow 1s infinite;
+    }
+
+    @keyframes pulseGlow {
+        0%, 100% { box-shadow: 0 0 10px rgba(255, 50, 50, 0.3); }
+        50% { box-shadow: 0 0 25px rgba(255, 50, 50, 0.6); }
+    }
+
+    .hl-input-box > input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        padding: 0.65rem 0;
+        font-size: 0.85rem;
+        color: #ccffcc;
+        font-family: 'Share Tech Mono', monospace;
+        outline: none;
+        letter-spacing: 0.5px;
+        text-shadow: 0 0 6px #22aa44;
+    }
+
+    .hl-input-box > input::placeholder {
+        color: #448855;
+        text-shadow: 0 0 4px #228833;
+    }
+
+    .input-send-btn {
+        background: linear-gradient(145deg, #0f3f1a, #0a2a12);
+        border: 1px solid #2aac4a;
+        color: #ccffcc;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+    }
+
+    .input-send-btn:hover {
+        border-color: #5af088;
+        box-shadow: 0 0 20px rgba(34, 221, 102, 0.35);
+        transform: scale(1.05);
+    }
+
+    /* Quick tags */
+    .hl-quick-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+
+    .tag {
+        background: rgba(10, 50, 16, 0.5);
+        padding: 0.3rem 1rem;
+        border-radius: 40px;
+        font-size: 0.65rem;
+        color: #99dd99;
+        border: 1px solid #1f7a33;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        text-shadow: 0 0 4px #22aa44;
+        letter-spacing: 0.3px;
+    }
+
+    .tag i { font-size: 0.6rem; color: #44dd77; }
+
+    .tag:hover {
+        background: #1a4a2a;
+        border-color: #3ad86a;
+        color: #eeffee;
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px rgba(34, 221, 102, 0.27);
+    }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.88);
+        backdrop-filter: blur(6px);
+        z-index: 200;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+    }
+
+    .modal-content {
+        width: 100%;
+        max-height: 85vh;
+        overflow-y: auto;
+        position: relative;
+        animation: fadeSlide 0.3s ease;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 0.8rem;
+        right: 0.8rem;
+        background: rgba(255, 50, 50, 0.2);
+        border: 1px solid #ff4444;
+        color: #ff7777;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        font-size: 1.1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transition: all 0.2s;
+        font-family: 'Share Tech Mono', monospace;
+    }
+
+    .modal-close:hover {
+        background: rgba(255, 50, 50, 0.4);
+        box-shadow: 0 0 15px rgba(255, 50, 50, 0.3);
+    }
+
+    /* ===== TOAST ===== */
+    .toast {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: #0f3f1a;
+        border: 1px solid #3ad86a;
+        color: #ddffdd;
+        padding: 0.7rem 1.5rem;
+        border-radius: 40px;
+        font-size: 0.75rem;
+        z-index: 300;
+        animation: fadeSlide 0.3s ease;
+        font-family: 'Share Tech Mono', monospace;
+        box-shadow: 0 0 20px rgba(0, 170, 51, 0.2);
+        text-shadow: 0 0 6px #33dd66;
+    }
+
+    /* ===== LIVE TRANSCRIPTION BAR (injected by JS) ===== */
+    #liveTranscriptionBar {
+        background: rgba(255, 50, 50, 0.15);
+        border: 1px solid #ff4444;
+        border-radius: 12px;
+        padding: 0.6rem 1rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        animation: fadeSlide 0.3s ease;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+        .helpline-layout {
+            grid-template-columns: 1fr;
+        }
+        .hl-sidebar {
+            position: static;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            padding: 0.8rem;
+            max-height: none;
+        }
+        .hl-sidebar-header {
+            width: 100%;
+            margin-bottom: 0;
+            padding-bottom: 0.4rem;
+        }
+        .hl-nav {
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .hl-nav-item {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.7rem;
+        }
+        .hl-sidebar-footer {
+            display: flex;
+            gap: 0.4rem;
+            width: 100%;
+            border-top: none;
+            padding-top: 0.4rem;
+        }
+        .hl-sidebar-footer button,
+        .hl-sidebar-footer a {
+            flex: 1;
+            margin-top: 0 !important;
+        }
+        .hl-chat-window {
+            max-height: 350px;
+            min-height: 300px;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .hl-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .hl-brand h1 {
+            font-size: 1.2rem;
+        }
+        .hl-input-box {
+            padding: 0.2rem;
+        }
+        .input-action-btn {
+            width: 30px;
+            height: 30px;
+            font-size: 0.7rem;
+        }
+        .input-send-btn {
+            width: 34px;
+            height: 34px;
+            font-size: 0.8rem;
+        }
+        .bubble {
+            max-width: 90%;
+            font-size: 0.8rem;
+        }
+    }
+</style>

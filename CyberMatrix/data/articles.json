@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "title": "Understanding Zero Trust Architecture",
+        "excerpt": "Zero Trust is not a product but a security philosophy. Learn the core principles and implementation strategies.",
+        "category": "defense",
+        "author": "CyberMatrix Team",
+        "date": "2026-06-15",
+        "readTime": "8 min read",
+        "tags": ["zero-trust", "architecture", "network-security"]
+    },
+    {
+        "id": 2,
+        "title": "The Rise of AI-Powered Phishing Attacks",
+        "excerpt": "How attackers are leveraging generative AI to create highly convincing and personalized phishing campaigns.",
+        "category": "threats",
+        "author": "CyberMatrix Team",
+        "date": "2026-06-10",
+        "readTime": "6 min read",
+        "tags": ["phishing", "AI", "social-engineering"]
+    },
+    {
+        "id": 3,
+        "title": "Ransomware Response Playbook",
+        "excerpt": "A step-by-step guide for organizations to prepare for and respond to ransomware incidents effectively.",
+        "category": "incident-response",
+        "author": "CyberMatrix Team",
+        "date": "2026-06-05",
+        "readTime": "12 min read",
+        "tags": ["ransomware", "incident-response", "playbook"]
+    },
+    {
+        "id": 4,
+        "title": "Cloud Security Best Practices 2026",
+        "excerpt": "Updated guidelines for securing cloud environments across AWS, Azure, and GCP with shared responsibility models.",
+        "category": "cloud",
+        "author": "CyberMatrix Team",
+        "date": "2026-05-28",
+        "readTime": "10 min read",
+        "tags": ["cloud", "AWS", "Azure", "GCP"]
+    },
+    {
+        "id": 5,
+        "title": "MFA Bypass Techniques and How to Defend Against Them",
+        "excerpt": "Attackers are finding ways around MFA. Learn about MFA fatigue, SIM swapping, and token theft.",
+        "category": "identity",
+        "author": "CyberMatrix Team",
+        "date": "2026-05-20",
+        "readTime": "7 min read",
+        "tags": ["MFA", "authentication", "identity"]
+    }
+]

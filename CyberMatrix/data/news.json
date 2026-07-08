@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "title": "Critical Vulnerability Discovered in Popular VPN Software",
+        "excerpt": "A critical RCE vulnerability (CVE-2026-12345) affects multiple enterprise VPN solutions. Patch immediately.",
+        "category": "alert",
+        "source": "CISA",
+        "date": "2026-07-07",
+        "url": "#",
+        "tags": ["vulnerability", "VPN", "CVE", "critical"]
+    },
+    {
+        "id": 2,
+        "title": "New Ransomware Group Targets Healthcare Sector",
+        "excerpt": "A newly identified ransomware group 'MedLock' has been targeting hospitals and healthcare providers across North America and Europe.",
+        "category": "threat",
+        "source": "CyberMatrix Research",
+        "date": "2026-07-05",
+        "url": "#",
+        "tags": ["ransomware", "healthcare", "threat-actor"]
+    },
+    {
+        "id": 3,
+        "title": "NIST Releases Updated Zero Trust Guidelines",
+        "excerpt": "NIST SP 800-207 revision adds new guidance for cloud-native environments and IoT device integration.",
+        "category": "update",
+        "source": "NIST",
+        "date": "2026-07-03",
+        "url": "#",
+        "tags": ["zero-trust", "NIST", "compliance", "framework"]
+    },
+    {
+        "id": 4,
+        "title": "Major DDoS Attack Disrupts European Banking Services",
+        "excerpt": "A coordinated DDoS attack lasting 72 hours targeted multiple European financial institutions. Investigation ongoing.",
+        "category": "incident",
+        "source": "ENISA",
+        "date": "2026-07-01",
+        "url": "#",
+        "tags": ["DDoS", "banking", "incident", "Europe"]
+    },
+    {
+        "id": 5,
+        "title": "AI-Generated Phishing Emails See 300% Increase in 2026",
+        "excerpt": "Security researchers report a dramatic rise in AI-crafted phishing campaigns with near-perfect grammar and personalization.",
+        "category": "trend",
+        "source": "CyberMatrix Research",
+        "date": "2026-06-28",
+        "url": "#",
+        "tags": ["phishing", "AI", "trend", "social-engineering"]
+    },
+    {
+        "id": 6,
+        "title": "Microsoft Patch Tuesday: 87 Vulnerabilities Fixed",
+        "excerpt": "July 2026 Patch Tuesday addresses 87 CVEs including 5 critical and 2 actively exploited zero-days.",
+        "category": "update",
+        "source": "Microsoft",
+        "date": "2026-06-25",
+        "url": "#",
+        "tags": ["patch-tuesday", "Microsoft", "CVE", "zero-day"]
+    },
+    {
+        "id": 7,
+        "title": "Cloud Misconfiguration Exposes 2.5 Million Records",
+        "excerpt": "An unsecured AWS S3 bucket belonging to a major retailer exposed customer PII including partial payment data.",
+        "category": "incident",
+        "source": "CyberMatrix Research",
+        "date": "2026-06-20",
+        "url": "#",
+        "tags": ["cloud", "data-breach", "AWS", "misconfiguration"]
+    },
+    {
+        "id": 8,
+        "title": "FBI Warns of Increased Insider Threat Activity",
+        "excerpt": "The FBI issues a joint advisory warning organizations about rising insider threat incidents linked to economic pressures.",
+        "category": "alert",
+        "source": "FBI",
+        "date": "2026-06-18",
+        "url": "#",
+        "tags": ["insider-threat", "FBI", "advisory", "economic"]
+    }
+]

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register — CyberMatrix</title>
+    <meta name="description" content="Create your CyberMatrix account to access the dashboard and save articles." />
+    <link rel="stylesheet" href="assets/css/matrix-theme.css" />
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <section class="section" style="display: flex; justify-content: center; align-items: center; min-height: 60vh;">
+        <div class="panel" style="max-width: 440px; width: 100%;">
+            <div class="brand" style="display: flex; align-items: center; justify-content: center; gap: 0.8rem; margin-bottom: 1.8rem;">
+                <i class="fas fa-shield-halved" style="font-size: 2.6rem; color: #3ddf6a; filter: drop-shadow(0 0 20px #22dd66);"></i>
+                <h1 style="font-weight: 400; font-size: 2rem; letter-spacing: 3px;">CyberMatrix</h1>
+            </div>
+            <div class="subtitle" style="text-align: center; font-size: 0.75rem; color: #66dd88; letter-spacing: 2px; margin-top: -0.8rem; margin-bottom: 2rem; border-bottom: 1px solid #1f7a33; padding-bottom: 1rem;">
+                <i class="fas fa-user-plus" style="margin-right: 8px;"></i> CREATE ACCOUNT
+            </div>
+
+            <form id="registerForm" autocomplete="off">
+                <div class="control-group">
+                    <label for="regName"><i class="fas fa-user"></i> Full Name</label>
+                    <div class="input-wrap-local">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="regName" placeholder="John Doe" required />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="regEmail"><i class="fas fa-envelope"></i> Email</label>
+                    <div class="input-wrap-local">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="regEmail" placeholder="your@email.com" required />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="regUsername"><i class="fas fa-id-badge"></i> Username</label>
+                    <div class="input-wrap-local">
+                        <i class="fas fa-id-badge"></i>
+                        <input type="text" id="regUsername" placeholder="Choose a username" required />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="regPassword"><i class="fas fa-key"></i> Password</label>
+                    <div class="input-wrap-local">
+                        <i class="fas fa-key"></i>
+                        <input type="password" id="regPassword" placeholder="Min. 8 characters" required minlength="8" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="regConfirmPassword"><i class="fas fa-check-circle"></i> Confirm Password</label>
+                    <div class="input-wrap-local">
+                        <i class="fas fa-check-circle"></i>
+                        <input type="password" id="regConfirmPassword" placeholder="Re-enter password" required />
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-matrix" style="width: 100%; padding: 0.9rem; font-size: 1rem;">
+                    <i class="fas fa-user-plus"></i> REGISTER
+                </button>
+
+                <div id="regError" style="color: #ff7777; font-size: 0.7rem; margin-top: 0.8rem; text-align: center; min-height: 1.2rem;"></div>
+            </form>
+
+            <div id="regSuccess" style="display: none; text-align: center; padding: 1.5rem 0;">
+                <i class="fas fa-check-circle" style="font-size: 2.5rem; color: #27c93f; margin-bottom: 0.8rem; display: block;"></i>
+                <h3>Account Created!</h3>
+                <p style="color: #88dd99; font-size: 0.8rem;">Redirecting to login...</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 1.5rem; font-size: 0.7rem; color: #448855;">
+                <p>Already have an account? <a href="login.html" style="color: #44dd77;">Login here</a></p>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+    <script src="assets/js/navbar.js"></script>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('regPassword').value;
+            const confirm = document.getElementById('regConfirmPassword').value;
+            const error = document.getElementById('regError');
+
+            if (password !== confirm) {
+                error.textContent = 'Passwords do not match.';
+                return;
+            }
+
+            if (password.length < 8) {
+                error.textContent = 'Password must be at least 8 characters.';
+                return;
+            }
+
+            // Demo: show success
+            error.textContent = '';
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('regSuccess').style.display = 'block';
+
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
+
+<style>
+    .control-group {
+        margin-bottom: 1.2rem;
+        text-align: left;
+    }
+    .control-group label {
+        display: block;
+        font-size: 0.7rem;
+        color: #88dd99;
+        letter-spacing: 1.5px;
+        margin-bottom: 0.4rem;
+    }
+    .input-wrap-local {
+        display: flex;
+        align-items: center;
+        background: rgba(2, 15, 4, 0.8);
+        border-radius: 60px;
+        border: 1px solid #1f7a33;
+        padding: 0.1rem 0.1rem 0.1rem 1.2rem;
+        transition: border 0.2s, box-shadow 0.2s;
+    }
+    .input-wrap-local:focus-within {
+        border-color: #3ad86a;
+        box-shadow: 0 0 15px rgba(0, 221, 85, 0.2);
+    }
+    .input-wrap-local i {
+        color: #44dd77;
+        font-size: 0.8rem;
+        margin-right: 0.5rem;
+    }
+    .input-wrap-local input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        padding: 0.75rem 0.4rem;
+        font-size: 0.85rem;
+        color: #ccffcc;
+        font-family: 'Share Tech Mono', monospace;
+        outline: none;
+        letter-spacing: 0.5px;
+    }
+    .input-wrap-local input::placeholder {
+        color: #448855;
+    }
+</style>

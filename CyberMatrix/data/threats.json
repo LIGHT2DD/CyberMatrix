@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "name": "Phishing Campaigns",
+        "description": "Sophisticated social engineering attacks targeting credentials through deceptive emails and fake login pages.",
+        "severity": "Critical",
+        "category": "phishing",
+        "icon": "fa-fish",
+        "indicators": ["Suspicious URLs", "Urgency in messaging", "Spoofed sender addresses"],
+        "mitigation": "MFA, email filters, user training, DMARC/DKIM/SPF"
+    },
+    {
+        "id": 2,
+        "name": "Ransomware",
+        "description": "Malware that encrypts files and demands payment. Ransomware-as-a-Service has lowered the barrier to entry.",
+        "severity": "Critical",
+        "category": "ransomware",
+        "icon": "fa-skull",
+        "indicators": ["File encryption", "Ransom notes", "Unusual file extensions"],
+        "mitigation": "Offline backups, EDR, patch management, disable macros"
+    },
+    {
+        "id": 3,
+        "name": "Zero-Day Exploits",
+        "description": "Previously unknown vulnerabilities exploited before patches are available. Increasingly traded on dark web markets.",
+        "severity": "High",
+        "category": "zero-day",
+        "icon": "fa-biohazard",
+        "indicators": ["Unexpected system behavior", "No patch available", "Targeted attacks"],
+        "mitigation": "Virtual patching, threat intelligence, application whitelisting"
+    },
+    {
+        "id": 4,
+        "name": "DDoS Attacks",
+        "description": "Distributed denial-of-service attacks overwhelming network resources. Amplification attacks on the rise.",
+        "severity": "High",
+        "category": "ddos",
+        "icon": "fa-network-wired",
+        "indicators": ["Traffic spikes", "Service unavailability", "Multiple source IPs"],
+        "mitigation": "CDN/DDoS protection, rate limiting, traffic scrubbing"
+    },
+    {
+        "id": 5,
+        "name": "Social Engineering",
+        "description": "Psychological manipulation to trick users into divulging confidential information or performing actions.",
+        "severity": "High",
+        "category": "social-engineering",
+        "icon": "fa-users",
+        "indicators": ["Unsolicited contact", "Pressure tactics", "Requests for sensitive info"],
+        "mitigation": "Security awareness training, verification protocols"
+    },
+    {
+        "id": 6,
+        "name": "Insider Threats",
+        "description": "Security risks originating from within the organization — employees, contractors, or partners.",
+        "severity": "Medium",
+        "category": "insider-threat",
+        "icon": "fa-user-secret",
+        "indicators": ["Unusual data access", "After-hours activity", "Large data transfers"],
+        "mitigation": "UEBA, least privilege, access reviews, DLP"
+    }
+]

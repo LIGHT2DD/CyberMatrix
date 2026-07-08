@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberMatrix — Cybersecurity Intelligence Platform</title>
+    <meta name="description" content="CyberMatrix provides cybersecurity intelligence, threat analysis, security tools, and educational resources." />
+    <link rel="stylesheet" href="assets/css/matrix-theme.css" />
+</head>
+<body>
+    <!-- Navbar will be injected by JS -->
+    <div id="navbar-container"></div>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-circle" style="color: #66ff88; font-size: 0.5rem;"></i>
+                    LIVE THREAT INTELLIGENCE
+                </div>
+                <h1 class="hero-title">
+                    Defend the <span class="hero-highlight">Matrix</span>
+                </h1>
+                <p class="hero-text">
+                    Real-time cybersecurity intelligence, advanced threat analysis, 
+                    and powerful security tools — all in one terminal.
+                </p>
+                <div class="hero-actions">
+                    <a href="threats.html" class="btn-matrix">
+                        <i class="fas fa-skull"></i> Explore Threats
+                    </a>
+                    <a href="tools.html" class="btn-matrix btn-matrix-outline">
+                        <i class="fas fa-tools"></i> Security Tools
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="1247">0</span>
+                        <span class="stat-label">Threats Tracked</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="89">0</span>
+                        <span class="stat-label">Articles</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="24">0</span>
+                        <span class="stat-label">Tools</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="99.9">0</span>
+                        <span class="stat-label">% Uptime</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                        <span class="terminal-title">matrix@cybersecurity:~$</span>
+                    </div>
+                    <div class="terminal-body">
+                        <p><span class="prompt">$</span> scanning threat landscape...</p>
+                        <p><span class="prompt">$</span> 1,247 active threats detected</p>
+                        <p><span class="prompt">$</span> 89 articles indexed</p>
+                        <p><span class="prompt">$</span> 24 tools available</p>
+                        <p><span class="prompt">$</span> system status: <span class="terminal-green">SECURE</span></p>
+                        <p class="terminal-cursor"><span class="prompt">$</span> _</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-cubes"></i> Core Features</h2>
+            <p class="section-subtitle">// everything you need for cyber defense</p>
+            
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-radar"></i></div>
+                    <h3 class="card-title">Threat Intelligence</h3>
+                    <p class="card-text">Real-time monitoring of malware, phishing, ransomware, zero-days, and emerging attack vectors.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-shield-virus"></i></div>
+                    <h3 class="card-title">Defense Strategies</h3>
+                    <p class="card-text">Zero Trust architectures, network segmentation, encryption standards, and incident response playbooks.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-tools"></i></div>
+                    <h3 class="card-title">Security Toolkit</h3>
+                    <p class="card-text">Password generators, hash tools, encoders, JSON formatter, and network lookups — all client-side.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-newspaper"></i></div>
+                    <h3 class="card-title">News & Alerts</h3>
+                    <p class="card-text">Curated cybersecurity news, CVE announcements, and critical security alerts from trusted sources.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-robot"></i></div>
+                    <h3 class="card-title">AI Helpline</h3>
+                    <p class="card-text">Interactive cybersecurity assistant. Ask questions, get instant answers on threats and defenses.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-user-shield"></i></div>
+                    <h3 class="card-title">User Dashboard</h3>
+                    <p class="card-text">Save articles, bookmark resources, track your learning, and customize your security feed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LATEST THREATS SECTION -->
+    <section class="section" style="background: rgba(0,0,0,0.2);">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-skull"></i> Latest Threats</h2>
+            <p class="section-subtitle">// active threats being tracked</p>
+            
+            <div class="grid-2" id="latestThreats">
+                <!-- Populated by JS -->
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="threats.html" class="btn-matrix">
+                    <i class="fas fa-arrow-right"></i> View All Threats
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECURITY TIPS SECTION -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-lightbulb"></i> Security Tips</h2>
+            <p class="section-subtitle">// essential practices for staying secure</p>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-key"></i></div>
+                    <h3 class="card-title">Use Strong, Unique Passwords</h3>
+                    <p class="card-text">Use a password manager. Never reuse passwords. Aim for 16+ character passphrases.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3 class="card-title">Enable Multi-Factor Authentication</h3>
+                    <p class="card-text">MFA blocks 99% of automated attacks. Use TOTP apps or hardware security keys, not SMS.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-sync-alt"></i></div>
+                    <h3 class="card-title">Keep Software Updated</h3>
+                    <p class="card-text">Enable automatic updates. Patch within 48 hours of critical CVE releases.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-fish"></i></div>
+                    <h3 class="card-title">Think Before You Click</h3>
+                    <p class="card-text">Verify sender addresses, hover over links, and never open unexpected attachments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER SECTION -->
+    <section class="section" style="background: rgba(0,0,0,0.2);">
+        <div class="container" style="text-align: center;">
+            <h2 class="section-title" style="justify-content: center;">
+                <i class="fas fa-envelope"></i> Stay Informed
+            </h2>
+            <p class="section-subtitle" style="text-align: center;">// weekly threat digest</p>
+            <p style="margin-bottom: 1.5rem; color: #88dd99;">Get the latest threats, CVE alerts, and security tips delivered to your inbox.</p>
+            <form class="newsletter-form" style="max-width: 500px; margin: 0 auto;" onsubmit="event.preventDefault(); alert('Subscribed! (demo)');">
+                <input type="email" placeholder="your@email.com" required style="flex: 1; background: rgba(2, 15, 4, 0.8); border: 1px solid #1f7a33; border-radius: 40px; padding: 0.7rem 1.2rem; color: #ccffcc; font-family: 'Share Tech Mono', monospace; outline: none;" />
+                <button type="submit" class="btn-matrix">
+                    <i class="fas fa-paper-plane"></i> Subscribe
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer will be injected -->
+    <div id="footer-container"></div>
+
+    <!-- SCRIPTS -->
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/home.js"></script>
+</body>
+</html>
+
+<style>
+    /* HERO SECTION */
+    .hero {
+        padding: 5rem 0 3rem;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .hero .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+    }
+    
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(0, 60, 20, 0.5);
+        padding: 0.4rem 1.2rem;
+        border-radius: 40px;
+        font-size: 0.65rem;
+        color: #88dd99;
+        border: 1px solid #2aac4a;
+        margin-bottom: 1.5rem;
+        letter-spacing: 2px;
+        animation: pulseGlow 2s infinite;
+    }
+    
+    .hero-title {
+        font-size: 3.5rem;
+        line-height: 1.1;
+        margin-bottom: 1.2rem;
+    }
+    
+    .hero-highlight {
+        color: #3ddf6a;
+        text-shadow: 0 0 30px #22dd66, 0 0 60px #22aa44;
+    }
+    
+    .hero-text {
+        font-size: 1rem;
+        color: #88dd99;
+        margin-bottom: 2rem;
+        line-height: 1.8;
+        max-width: 500px;
+    }
+    
+    .hero-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 2.5rem;
+    }
+    
+    .hero-stats {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+    
+    .stat-item {
+        text-align: center;
+    }
+    
+    .stat-number {
+        display: block;
+        font-size: 1.8rem;
+        color: #3ddf6a;
+        text-shadow: 0 0 20px #22dd66;
+    }
+    
+    .stat-label {
+        font-size: 0.6rem;
+        color: #88dd99;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+    
+    /* Terminal */
+    .terminal-window {
+        background: rgba(2, 8, 2, 0.95);
+        border: 1px solid #1f7a33;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 0 40px rgba(0, 170, 51, 0.15);
+    }
+    
+    .terminal-header {
+        background: rgba(15, 30, 15, 0.6);
+        padding: 0.6rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-bottom: 1px solid #1f7a33;
+    }
+    
+    .terminal-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+    
+    .terminal-dot.red { background: #ff5f56; }
+    .terminal-dot.yellow { background: #ffbd2e; }
+    .terminal-dot.green { background: #27c93f; }
+    
+    .terminal-title {
+        margin-left: 0.5rem;
+        font-size: 0.7rem;
+        color: #66aa77;
+    }
+    
+    .terminal-body {
+        padding: 1.5rem;
+        font-size: 0.85rem;
+        line-height: 2;
+    }
+    
+    .terminal-body p {
+        color: #88dd99;
+    }
+    
+    .prompt {
+        color: #3ddf6a;
+        margin-right: 0.5rem;
+    }
+    
+    .terminal-green {
+        color: #27c93f;
+        text-shadow: 0 0 10px #27c93f;
+    }
+    
+    .terminal-cursor .prompt {
+        animation: blink 1s infinite;
+    }
+    
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+    
+    @media (max-width: 768px) {
+        .hero .container {
+            grid-template-columns: 1fr;
+        }
+        .hero-title {
+            font-size: 2.2rem;
+        }
+        .hero-stats {
+            gap: 1rem;
+        }
+        .terminal-window {
+            display: none;
+        }
+    }
+</style>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login — CyberMatrix</title>
+    <meta name="description" content="Secure login to CyberMatrix dashboard." />
+    <link rel="stylesheet" href="assets/css/matrix-theme.css" />
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <section class="section" style="display: flex; justify-content: center; align-items: center; min-height: 60vh;">
+        <div class="login-wrapper panel" style="max-width: 420px; width: 100%;">
+            <div class="brand" style="display: flex; align-items: center; justify-content: center; gap: 0.8rem; margin-bottom: 1.8rem;">
+                <i class="fas fa-shield-halved" style="font-size: 2.6rem; color: #3ddf6a; filter: drop-shadow(0 0 20px #22dd66);"></i>
+                <h1 style="font-weight: 400; font-size: 2rem; letter-spacing: 3px;">CyberMatrix</h1>
+            </div>
+            <div class="subtitle" style="text-align: center; font-size: 0.75rem; color: #66dd88; letter-spacing: 2px; margin-top: -0.8rem; margin-bottom: 2rem; border-bottom: 1px solid #1f7a33; padding-bottom: 1rem;">
+                <i class="fas fa-lock" style="margin-right: 8px;"></i> SECURE ACCESS · v2.0
+            </div>
+
+            <form id="loginForm" autocomplete="off">
+                <div class="input-group" style="margin-bottom: 1.5rem; text-align: left;">
+                    <label for="username" style="display: block; font-size: 0.7rem; color: #88dd99; letter-spacing: 1.5px; margin-bottom: 0.4rem;">
+                        <i class="fas fa-user" style="margin-right: 6px;"></i> USERNAME
+                    </label>
+                    <div class="input-wrap" style="display: flex; align-items: center; background: rgba(2, 15, 4, 0.8); border-radius: 60px; border: 1px solid #1f7a33; padding: 0.1rem 0.1rem 0.1rem 1.2rem;">
+                        <i class="fas fa-user" style="color: #44dd77; margin-right: 0.6rem;"></i>
+                        <input type="text" id="username" placeholder="enter username" value="admin123" required
+                            style="flex: 1; background: transparent; border: none; padding: 0.8rem 0.4rem; font-size: 0.9rem; color: #ccffcc; font-family: 'Share Tech Mono', monospace; outline: none;" />
+                    </div>
+                </div>
+
+                <div class="input-group" style="margin-bottom: 1.5rem; text-align: left;">
+                    <label for="password" style="display: block; font-size: 0.7rem; color: #88dd99; letter-spacing: 1.5px; margin-bottom: 0.4rem;">
+                        <i class="fas fa-key" style="margin-right: 6px;"></i> PASSWORD
+                    </label>
+                    <div class="input-wrap" style="display: flex; align-items: center; background: rgba(2, 15, 4, 0.8); border-radius: 60px; border: 1px solid #1f7a33; padding: 0.1rem 0.1rem 0.1rem 1.2rem;">
+                        <i class="fas fa-key" style="color: #44dd77; margin-right: 0.6rem;"></i>
+                        <input type="password" id="password" placeholder="••••••••" value="admin123" required
+                            style="flex: 1; background: transparent; border: none; padding: 0.8rem 0.4rem; font-size: 0.9rem; color: #ccffcc; font-family: 'Share Tech Mono', monospace; outline: none;" />
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-matrix" style="width: 100%; padding: 0.9rem; font-size: 1rem;">
+                    <i class="fas fa-arrow-right-to-bracket"></i> LOGIN
+                </button>
+
+                <div class="error-msg" id="errorMsg" style="color: #ff7777; font-size: 0.75rem; margin-top: 1rem; min-height: 1.5rem; text-align: center; opacity: 0; transition: opacity 0.25s;">
+                    <i class="fas fa-triangle-exclamation"></i> Invalid credentials.
+                </div>
+            </form>
+
+            <div style="text-align: center; margin-top: 1.5rem; font-size: 0.7rem; color: #448855;">
+                <p>Demo credentials: <strong style="color: #88dd99;">admin123 / admin123</strong></p>
+                <p style="margin-top: 0.5rem;">Don't have an account? <a href="register.html" style="color: #44dd77;">Register here</a></p>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+    <script src="assets/js/navbar.js"></script>
+    <script>
+        // Simple login logic
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (username === 'admin123' && password === 'admin123') {
+                errorMsg.style.opacity = '0';
+                // Redirect to dashboard
+                window.location.href = 'dashboard.html';
+            } else {
+                errorMsg.style.opacity = '1';
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            }
+        });
+
+        // Clear error on input
+        document.getElementById('username').addEventListener('input', function() {
+            document.getElementById('errorMsg').style.opacity = '0';
+        });
+        document.getElementById('password').addEventListener('input', function() {
+            document.getElementById('errorMsg').style.opacity = '0';
+        });
+    </script>
+</body>
+</html>
