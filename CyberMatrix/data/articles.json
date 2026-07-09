@@ -48,5 +48,55 @@
         "date": "2026-05-20",
         "readTime": "7 min read",
         "tags": ["MFA", "authentication", "identity"]
+    },
+    {
+        "id": 6,
+        "title": "Credential Stuffing Defense Basics",
+        "excerpt": "How leaked passwords are reused at scale and what teams can do to slow automated account takeover.",
+        "category": "identity",
+        "author": "CyberMatrix Team",
+        "date": "2026-05-14",
+        "readTime": "6 min read",
+        "tags": ["credential-stuffing", "MFA", "account-security"]
+    },
+    {
+        "id": 7,
+        "title": "Building a Small Business Incident Timeline",
+        "excerpt": "A practical guide to recording events, actions, and evidence during suspicious security activity.",
+        "category": "incident-response",
+        "author": "CyberMatrix Team",
+        "date": "2026-05-08",
+        "readTime": "5 min read",
+        "tags": ["incident-response", "timeline", "evidence"]
+    },
+    {
+        "id": 8,
+        "title": "Security Headers Every Website Should Review",
+        "excerpt": "CSP, HSTS, Referrer-Policy, and other browser headers that reduce common web attack paths.",
+        "category": "web-security",
+        "author": "CyberMatrix Team",
+        "date": "2026-05-01",
+        "readTime": "8 min read",
+        "tags": ["headers", "CSP", "web-security"]
+    },
+    {
+        "id": 9,
+        "title": "Recognizing Business Email Compromise",
+        "excerpt": "Warning signs of invoice fraud, executive impersonation, and payment redirection scams.",
+        "category": "threats",
+        "author": "CyberMatrix Team",
+        "date": "2026-04-24",
+        "readTime": "7 min read",
+        "tags": ["BEC", "fraud", "email-security"]
+    },
+    {
+        "id": 10,
+        "title": "Beginner Guide to CVE Research",
+        "excerpt": "How to read CVE IDs, compare NVD and CISA sources, and decide what needs urgent attention.",
+        "category": "vulnerability-management",
+        "author": "CyberMatrix Team",
+        "date": "2026-04-18",
+        "readTime": "9 min read",
+        "tags": ["CVE", "NVD", "CISA", "vulnerabilities"]
     }
 ]

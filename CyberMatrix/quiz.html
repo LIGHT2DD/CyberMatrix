@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyber Quiz — CyberMatrix</title>
+    <meta
+      name="description"
+      content="CyberMatrix cybersecurity quiz for phishing and security awareness practice."
+    />
+    <link rel="stylesheet" href="assets/css/matrix-theme.css" />
+  </head>
+  <body>
+    <div id="navbar-container"></div>
+
+    <section class="section">
+      <div class="container">
+        <h1 class="section-title">
+          <i class="fas fa-question-circle"></i> Cyber Quiz
+        </h1>
+        <p class="section-subtitle">// test your security knowledge</p>
+
+        <div class="card" id="cyberQuiz">
+          <div class="card-icon"><i class="fas fa-brain"></i></div>
+          <div class="quiz-status">
+            <span class="badge" id="quizProgress">Question 1/25</span>
+            <span class="badge" id="quizScore">Score 0/0</span>
+          </div>
+          <h3 class="card-title" id="quizQuestion">
+            How confident are you in spotting phishing attempts?
+          </h3>
+          <p class="card-text" id="quizPrompt">
+            Challenge yourself with quick security scenarios and sharpen your
+            instincts.
+          </p>
+          <div class="quiz-options" id="quizOptions"></div>
+          <div class="quiz-feedback" id="quizFeedback" aria-live="polite"></div>
+          <button class="btn-matrix btn-matrix-outline" id="nextQuestion" type="button">
+            <i class="fas fa-arrow-right"></i> Next Question
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/quiz.js"></script>
+  </body>
+</html>
+
+<style>
+  #cyberQuiz {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .quiz-options {
+    display: grid;
+    gap: 0.65rem;
+    margin-top: 1rem;
+  }
+
+  .quiz-status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .quiz-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--card-border);
+    border-radius: 999px;
+    color: var(--text-secondary);
+    padding: 0.65rem 0.95rem;
+    font: inherit;
+    font-size: 0.85rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .quiz-option:hover {
+    border-color: rgba(0, 230, 118, 0.38);
+    color: var(--text-primary);
+    background: rgba(0, 230, 118, 0.08);
+  }
+
+  .quiz-option.correct {
+    border-color: rgba(0, 230, 118, 0.6);
+    background: rgba(0, 230, 118, 0.12);
+    color: var(--text-primary);
+  }
+
+  .quiz-option.incorrect {
+    border-color: rgba(239, 68, 68, 0.55);
+    background: rgba(239, 68, 68, 0.1);
+  }
+
+  .quiz-option i {
+    width: 16px;
+    color: var(--accent);
+  }
+
+  .quiz-feedback {
+    min-height: 1.5rem;
+    margin-top: 0.95rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  #nextQuestion {
+    margin-top: 1rem;
+  }
+</style>

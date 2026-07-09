@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning Roadmap — CyberMatrix</title>
+    <meta
+      name="description"
+      content="CyberMatrix guided cybersecurity learning roadmap with trackable progress."
+    />
+    <link rel="stylesheet" href="assets/css/matrix-theme.css" />
+  </head>
+  <body>
+    <div id="navbar-container"></div>
+
+    <section class="section">
+      <div class="container">
+        <h1 class="section-title">
+          <i class="fas fa-route"></i> Learning Roadmap
+        </h1>
+        <p class="section-subtitle">// guided cyber education path</p>
+
+        <div class="grid-3" id="roadmapGrid">
+          <div class="card roadmap-card" data-roadmap="beginner">
+            <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h3 class="card-title">Beginner</h3>
+            <p class="card-text">
+              Build safe daily habits and understand the core language of
+              cybersecurity.
+            </p>
+            <div class="roadmap-progress" aria-live="polite">
+              <span class="badge">0/8 complete</span>
+            </div>
+            <div class="roadmap-steps"></div>
+          </div>
+
+          <div class="card roadmap-card" data-roadmap="intermediate">
+            <div class="card-icon"><i class="fas fa-microscope"></i></div>
+            <h3 class="card-title">Intermediate</h3>
+            <p class="card-text">
+              Practice investigation, hardening, and incident response skills.
+            </p>
+            <div class="roadmap-progress" aria-live="polite">
+              <span class="badge">0/8 complete</span>
+            </div>
+            <div class="roadmap-steps"></div>
+          </div>
+
+          <div class="card roadmap-card" data-roadmap="advanced">
+            <div class="card-icon"><i class="fas fa-user-shield"></i></div>
+            <h3 class="card-title">Advanced</h3>
+            <p class="card-text">
+              Move into threat hunting, architecture, automation, and leadership.
+            </p>
+            <div class="roadmap-progress" aria-live="polite">
+              <span class="badge">0/8 complete</span>
+            </div>
+            <div class="roadmap-steps"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/roadmap.js"></script>
+  </body>
+</html>
+
+<style>
+  .roadmap-progress {
+    margin-top: 1rem;
+  }
+
+  .roadmap-steps {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+
+  .roadmap-step {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--card-border);
+    border-radius: 999px;
+    color: var(--text-secondary);
+    padding: 0.6rem 0.9rem;
+    font: inherit;
+    font-size: 0.85rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .roadmap-step:hover {
+    border-color: rgba(0, 230, 118, 0.38);
+    color: var(--text-primary);
+    background: rgba(0, 230, 118, 0.08);
+  }
+
+  .roadmap-step.completed {
+    color: var(--text-primary);
+    border-color: rgba(0, 230, 118, 0.42);
+    background: rgba(0, 230, 118, 0.1);
+  }
+
+  .roadmap-step i {
+    width: 16px;
+    color: var(--accent);
+  }
+</style>

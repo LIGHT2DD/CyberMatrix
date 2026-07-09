@@ -26,6 +26,8 @@
   let conversationContext = [];
   let speechRecognition = null;
   let isRecording = false;
+  let activeChatId = `chat-${Date.now()}`;
+  let isRestoringChat = false;
 
   // ===== DOM ELEMENTS =====
   const appContainer = document.getElementById("appContainer");
@@ -44,6 +46,8 @@
   const imageModal = document.getElementById("imageModal");
   const toast = document.getElementById("toast");
   const connectionStatus = document.getElementById("connectionStatus");
+  const chatSessionList = document.getElementById("chatSessionList");
+  const newChatBtn = document.getElementById("newChatBtn");
 
   // ===== KNOWLEDGE BASE =====
   const knowledgeBase = [
@@ -284,6 +288,135 @@
     return `⏱️ ${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
   }
 
+  function getSavedChats() {
+    try {
+      return JSON.parse(localStorage.getItem("cm_helpline_chats")) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  function stripHtml(value) {
+    const holder = document.createElement("div");
+    holder.innerHTML = value || "";
+    return holder.textContent.trim();
+  }
+
+  function getChatTitle(messages) {
+    const firstUser = messages.find((message) => message.sender === "user");
+    const title = stripHtml(firstUser?.text || messages[0]?.text || "New chat");
+    return title.length > 34 ? `${title.slice(0, 34)}...` : title || "New chat";
+  }
+
+  function saveCurrentChat() {
+    if (isRestoringChat || chatHistory.length === 0) return;
+
+    const chats = getSavedChats().filter((chat) => chat.id !== activeChatId);
+    chats.unshift({
+      id: activeChatId,
+      title: getChatTitle(chatHistory),
+      updatedAt: new Date().toISOString(),
+      messages: chatHistory,
+    });
+    localStorage.setItem("cm_helpline_chats", JSON.stringify(chats.slice(0, 12)));
+    renderChatSessions();
+  }
+
+  function renderChatSessions() {
+    if (!chatSessionList) return;
+    const chats = getSavedChats();
+    if (!chats.length) {
+      chatSessionList.innerHTML = '<span class="hl-session-empty">No saved chats</span>';
+      return;
+    }
+
+    chatSessionList.innerHTML = chats
+      .map((chat) => {
+        const time = new Date(chat.updatedAt).toLocaleString([], {
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        return `
+          <button class="hl-session-item ${chat.id === activeChatId ? "active" : ""}" type="button" data-chat-id="${chat.id}">
+            <span class="hl-session-title">${chat.title}</span>
+            <span class="hl-session-time">${time}</span>
+          </button>
+        `;
+      })
+      .join("");
+  }
+
+  function renderWelcomeMessage(text = "I'm your AI cybersecurity assistant. Ask a question or upload a file to begin.") {
+    messageContainer.innerHTML = `
+      <div class="message bot">
+        <div class="avatar"><i class="fas fa-robot"></i></div>
+        <div class="bubble">
+          <strong>MATRIX SECURITY HELPLINE</strong><br />
+          ${text}
+          <span class="timestamp">${getTimestamp()}</span>
+        </div>
+      </div>`;
+  }
+
+  function renderSavedMessage(message) {
+    const msgDiv = document.createElement("div");
+    msgDiv.className = `message ${message.sender}`;
+
+    const avatar = document.createElement("div");
+    avatar.className = "avatar";
+    avatar.innerHTML =
+      message.sender === "bot"
+        ? '<i class="fas fa-robot"></i>'
+        : '<i class="fas fa-user"></i>';
+
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    bubble.innerHTML = message.text;
+
+    const time = document.createElement("span");
+    time.className = "timestamp";
+    time.textContent = message.timestamp || getTimestamp();
+    bubble.appendChild(time);
+
+    msgDiv.appendChild(avatar);
+    msgDiv.appendChild(bubble);
+    messageContainer.appendChild(msgDiv);
+  }
+
+  function loadChatSession(chatId) {
+    const chat = getSavedChats().find((item) => item.id === chatId);
+    if (!chat) return;
+
+    saveCurrentChat();
+    isRestoringChat = true;
+    activeChatId = chat.id;
+    chatHistory = chat.messages || [];
+    conversationContext = chatHistory.slice(-10).map((message) => ({
+      role: message.sender === "bot" ? "assistant" : "user",
+      content: stripHtml(message.text),
+    }));
+
+    messageContainer.innerHTML = "";
+    chatHistory.forEach(renderSavedMessage);
+    isRestoringChat = false;
+    clearPendingFile();
+    renderChatSessions();
+    scrollToBottom();
+  }
+
+  function startNewChat() {
+    saveCurrentChat();
+    activeChatId = `chat-${Date.now()}`;
+    chatHistory = [];
+    conversationContext = [];
+    clearPendingFile();
+    renderWelcomeMessage("New chat started. How can I help you?");
+    renderChatSessions();
+    searchInput.focus();
+  }
+
   function updateConnectionStatus(status, color) {
     if (!connectionStatus) return;
     connectionStatus.innerHTML = `<i class="fas fa-circle" style="color: ${color}; font-size: 0.45rem;"></i> ${status}`;
@@ -324,6 +457,7 @@
       conversationContext.push({ role: "assistant", content: text });
       if (conversationContext.length > 10) conversationContext.shift();
     }
+    saveCurrentChat();
   }
 
   function addImageMessage(imageSrc, sender = "user", caption = "") {
@@ -360,6 +494,7 @@
     scrollToBottom();
 
     chatHistory.push({ sender, text: "[Image]", timestamp: getTimestamp() });
+    saveCurrentChat();
   }
 
   function addAudioMessage(
@@ -409,6 +544,7 @@
       text: `[Audio: ${fileName}]`,
       timestamp: getTimestamp(),
     });
+    saveCurrentChat();
   }
 
   // ===== TYPING INDICATOR =====
@@ -1099,9 +1235,24 @@
             </div>`;
     chatHistory = [];
     conversationContext = [];
+    localStorage.setItem(
+      "cm_helpline_chats",
+      JSON.stringify(getSavedChats().filter((chat) => chat.id !== activeChatId)),
+    );
     clearPendingFile();
+    renderChatSessions();
     showToast("🗑️ Chat cleared.");
   });
+
+  newChatBtn?.addEventListener("click", startNewChat);
+
+  chatSessionList?.addEventListener("click", (e) => {
+    const item = e.target.closest(".hl-session-item");
+    if (!item) return;
+    loadChatSession(item.dataset.chatId);
+  });
+
+  renderChatSessions();
 
   // ===== SIDEBAR NAVIGATION =====
   document.querySelectorAll(".hl-nav-item").forEach((item) => {

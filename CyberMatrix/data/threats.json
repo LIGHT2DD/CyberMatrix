@@ -1,62 +1,156 @@
 [
-    {
-        "id": 1,
-        "name": "Phishing Campaigns",
-        "description": "Sophisticated social engineering attacks targeting credentials through deceptive emails and fake login pages.",
-        "severity": "Critical",
-        "category": "phishing",
-        "icon": "fa-fish",
-        "indicators": ["Suspicious URLs", "Urgency in messaging", "Spoofed sender addresses"],
-        "mitigation": "MFA, email filters, user training, DMARC/DKIM/SPF"
-    },
-    {
-        "id": 2,
-        "name": "Ransomware",
-        "description": "Malware that encrypts files and demands payment. Ransomware-as-a-Service has lowered the barrier to entry.",
-        "severity": "Critical",
-        "category": "ransomware",
-        "icon": "fa-skull",
-        "indicators": ["File encryption", "Ransom notes", "Unusual file extensions"],
-        "mitigation": "Offline backups, EDR, patch management, disable macros"
-    },
-    {
-        "id": 3,
-        "name": "Zero-Day Exploits",
-        "description": "Previously unknown vulnerabilities exploited before patches are available. Increasingly traded on dark web markets.",
-        "severity": "High",
-        "category": "zero-day",
-        "icon": "fa-biohazard",
-        "indicators": ["Unexpected system behavior", "No patch available", "Targeted attacks"],
-        "mitigation": "Virtual patching, threat intelligence, application whitelisting"
-    },
-    {
-        "id": 4,
-        "name": "DDoS Attacks",
-        "description": "Distributed denial-of-service attacks overwhelming network resources. Amplification attacks on the rise.",
-        "severity": "High",
-        "category": "ddos",
-        "icon": "fa-network-wired",
-        "indicators": ["Traffic spikes", "Service unavailability", "Multiple source IPs"],
-        "mitigation": "CDN/DDoS protection, rate limiting, traffic scrubbing"
-    },
-    {
-        "id": 5,
-        "name": "Social Engineering",
-        "description": "Psychological manipulation to trick users into divulging confidential information or performing actions.",
-        "severity": "High",
-        "category": "social-engineering",
-        "icon": "fa-users",
-        "indicators": ["Unsolicited contact", "Pressure tactics", "Requests for sensitive info"],
-        "mitigation": "Security awareness training, verification protocols"
-    },
-    {
-        "id": 6,
-        "name": "Insider Threats",
-        "description": "Security risks originating from within the organization — employees, contractors, or partners.",
-        "severity": "Medium",
-        "category": "insider-threat",
-        "icon": "fa-user-secret",
-        "indicators": ["Unusual data access", "After-hours activity", "Large data transfers"],
-        "mitigation": "UEBA, least privilege, access reviews, DLP"
-    }
+  {
+    "id": 1,
+    "name": "Phishing Campaigns",
+    "description": "Sophisticated social engineering attacks targeting credentials through deceptive emails and fake login pages.",
+    "severity": "Critical",
+    "category": "phishing",
+    "icon": "fa-fish",
+    "indicators": [
+      "Suspicious URLs",
+      "Urgency in messaging",
+      "Spoofed sender addresses"
+    ],
+    "mitigation": "MFA, email filters, user training, DMARC/DKIM/SPF"
+  },
+  {
+    "id": 2,
+    "name": "Ransomware",
+    "description": "Malware that encrypts files and demands payment. Ransomware-as-a-Service has lowered the barrier to entry.",
+    "severity": "Critical",
+    "category": "ransomware",
+    "icon": "fa-skull",
+    "indicators": [
+      "File encryption",
+      "Ransom notes",
+      "Unusual file extensions"
+    ],
+    "mitigation": "Offline backups, EDR, patch management, disable macros"
+  },
+  {
+    "id": 3,
+    "name": "Zero-Day Exploits",
+    "description": "Previously unknown vulnerabilities exploited before patches are available. Increasingly traded on dark web markets.",
+    "severity": "High",
+    "category": "zero-day",
+    "icon": "fa-biohazard",
+    "indicators": [
+      "Unexpected system behavior",
+      "No patch available",
+      "Targeted attacks"
+    ],
+    "mitigation": "Virtual patching, threat intelligence, application whitelisting"
+  },
+  {
+    "id": 4,
+    "name": "DDoS Attacks",
+    "description": "Distributed denial-of-service attacks overwhelming network resources. Amplification attacks on the rise.",
+    "severity": "High",
+    "category": "ddos",
+    "icon": "fa-network-wired",
+    "indicators": [
+      "Traffic spikes",
+      "Service unavailability",
+      "Multiple source IPs"
+    ],
+    "mitigation": "CDN/DDoS protection, rate limiting, traffic scrubbing"
+  },
+  {
+    "id": 5,
+    "name": "Social Engineering",
+    "description": "Psychological manipulation to trick users into divulging confidential information or performing actions.",
+    "severity": "High",
+    "category": "social-engineering",
+    "icon": "fa-users",
+    "indicators": [
+      "Unsolicited contact",
+      "Pressure tactics",
+      "Requests for sensitive info"
+    ],
+    "mitigation": "Security awareness training, verification protocols"
+  },
+  {
+    "id": 6,
+    "name": "Insider Threats",
+    "description": "Security risks originating from within the organization — employees, contractors, or partners.",
+    "severity": "Low",
+    "category": "insider-threat",
+    "icon": "fa-user-secret",
+    "indicators": [
+      "Unusual data access",
+      "After-hours activity",
+      "Large data transfers"
+    ],
+    "mitigation": "UEBA, least privilege, access reviews, DLP"
+  },
+  {
+    "id": 7,
+    "name": "Credential Stuffing",
+    "description": "Automated login attempts using leaked username and password pairs from previous breaches.",
+    "severity": "High",
+    "category": "identity",
+    "icon": "fa-key",
+    "indicators": [
+      "Login spikes",
+      "Repeated failed attempts",
+      "Unusual geographic access"
+    ],
+    "mitigation": "MFA, rate limiting, bot detection, password reuse checks"
+  },
+  {
+    "id": 8,
+    "name": "Supply Chain Attacks",
+    "description": "Compromise of vendors, libraries, updates, or third-party tools to reach downstream targets.",
+    "severity": "Critical",
+    "category": "supply-chain",
+    "icon": "fa-code-branch",
+    "indicators": [
+      "Unexpected dependency changes",
+      "Unsigned updates",
+      "Vendor compromise reports"
+    ],
+    "mitigation": "SBOM review, signed builds, vendor risk checks, dependency pinning"
+  },
+  {
+    "id": 9,
+    "name": "Business Email Compromise",
+    "description": "Fraud campaigns that impersonate executives, vendors, or finance staff to redirect payments or data.",
+    "severity": "High",
+    "category": "bec",
+    "icon": "fa-envelope-circle-check",
+    "indicators": [
+      "Payment change requests",
+      "Lookalike domains",
+      "Unusual executive urgency"
+    ],
+    "mitigation": "Payment verification, DMARC, approval workflows, awareness training"
+  },
+  {
+    "id": 10,
+    "name": "Cloud Misconfiguration",
+    "description": "Exposed storage, excessive IAM permissions, or weak logging that can leak data or enable compromise.",
+    "severity": "High",
+    "category": "cloud",
+    "icon": "fa-cloud",
+    "indicators": [
+      "Public buckets",
+      "Overprivileged roles",
+      "Disabled audit logs"
+    ],
+    "mitigation": "CSPM checks, least privilege IAM, encryption, continuous audit logging"
+  },
+  {
+    "id": 11,
+    "name": "Malvertising",
+    "description": "Malicious advertisements or compromised ad networks that redirect users to scams or exploit kits.",
+    "severity": "Elevated",
+    "category": "web",
+    "icon": "fa-rectangle-ad",
+    "indicators": [
+      "Unexpected redirects",
+      "Fake update prompts",
+      "Suspicious ad domains"
+    ],
+    "mitigation": "Browser protection, ad filtering, patching, DNS security controls"
+  }
 ]

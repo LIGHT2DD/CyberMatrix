@@ -72,6 +72,8 @@
 
             if (username === 'admin123' && password === 'admin123') {
                 errorMsg.style.opacity = '0';
+                localStorage.setItem('cybermatrix-logged-in', 'true');
+                localStorage.setItem('cybermatrix-user', username);
                 // Redirect to dashboard
                 window.location.href = 'dashboard.html';
             } else {

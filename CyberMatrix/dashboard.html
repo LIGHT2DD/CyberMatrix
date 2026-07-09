@@ -67,6 +67,21 @@
                                 <h3 class="card-title">Last Active</h3>
                                 <p class="card-text" style="font-size: 1rem; color: #88dd99;">Today</p>
                             </div>
+                            <div class="card">
+                                <div class="card-icon"><i class="fas fa-route"></i></div>
+                                <h3 class="card-title">Roadmap Progress</h3>
+                                <p class="card-text" id="dashRoadmapProgress" style="font-size: 1rem; color: #88dd99;">Not started</p>
+                            </div>
+                            <div class="card">
+                                <div class="card-icon"><i class="fas fa-clipboard-check"></i></div>
+                                <h3 class="card-title">Checklist Progress</h3>
+                                <p class="card-text" id="dashChecklistProgress" style="font-size: 1rem; color: #88dd99;">0 of 0 complete</p>
+                            </div>
+                            <div class="card">
+                                <div class="card-icon"><i class="fas fa-gauge-high"></i></div>
+                                <h3 class="card-title">Security Score</h3>
+                                <p class="card-text" id="dashSecurityScore" style="font-size: 1rem; color: #88dd99;">Not scored</p>
+                            </div>
                         </div>
 
                         <div class="panel">
@@ -226,6 +241,41 @@
                 document.getElementById(sectionId)?.classList.add('active');
             });
         });
+
+        function readLocalJson(key, fallback) {
+            try {
+                return JSON.parse(localStorage.getItem(key)) || fallback;
+            } catch {
+                return fallback;
+            }
+        }
+
+        function renderLearningProgress() {
+            const checklist = readLocalJson('cm_checklist_progress', null);
+            const scorecard = readLocalJson('cm_scorecard_result', null);
+            const roadmap = readLocalJson('cm_roadmap_progress', null);
+            const quiz = readLocalJson('cm_quiz_score', null);
+
+            const checklistTarget = document.getElementById('dashChecklistProgress');
+            const scoreTarget = document.getElementById('dashSecurityScore');
+            const roadmapTarget = document.getElementById('dashRoadmapProgress');
+
+            if (checklistTarget && checklist) {
+                checklistTarget.textContent = `${checklist.complete} of ${checklist.total} complete`;
+            }
+            if (scoreTarget && scorecard) {
+                scoreTarget.textContent = `${scorecard.rating} (${scorecard.score}/${scorecard.total})`;
+            }
+            if (roadmapTarget) {
+                if (roadmap) {
+                    roadmapTarget.textContent = `${roadmap.complete || 0} of ${roadmap.total || 0} complete`;
+                } else if (quiz) {
+                    roadmapTarget.textContent = `Quiz score saved: ${quiz.score || 0}`;
+                }
+            }
+        }
+
+        renderLearningProgress();
     </script>
 </body>
 </html>

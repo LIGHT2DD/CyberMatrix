@@ -2,193 +2,444 @@
 <!-- Include this via fetch or build tool on each page -->
 
 <nav class="navbar" id="navbar">
-    <div class="nav-container container">
-        <a href="index.html" class="nav-brand">
-            <i class="fas fa-shield-halved"></i>
-            <span>CyberMatrix</span>
-        </a>
-        
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        
-        <ul class="nav-links" id="navLinks">
-            <li><a href="index.html" class="nav-link active">Home</a></li>
-            <li><a href="about.html" class="nav-link">About</a></li>
-            <li><a href="threats.html" class="nav-link">Threats</a></li>
-            <li><a href="tools.html" class="nav-link">Tools</a></li>
-            <li><a href="articles.html" class="nav-link">Articles</a></li>
-            <li><a href="news.html" class="nav-link">News</a></li>
-            <li><a href="helpline.html" class="nav-link">Helpline</a></li>
-            <li><a href="contact.html" class="nav-link">Contact</a></li>
-        </ul>
-        
-        <div class="nav-actions">
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                <i class="fas fa-moon"></i>
-            </button>
-            <a href="login.html" class="btn-matrix btn-matrix-outline" style="padding: 0.4rem 1.2rem; font-size: 0.75rem;">
-                <i class="fas fa-key"></i> Login
-            </a>
-        </div>
+  <div class="nav-container container">
+    <a href="index.html" class="nav-brand">
+      <i class="fas fa-shield-halved"></i>
+      <span>CyberMatrix</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="threats.html" class="nav-link">Threats</a></li>
+      <li><a href="tools.html" class="nav-link">Tools</a></li>
+      <li><a href="articles.html" class="nav-link">Articles</a></li>
+      <li><a href="news.html" class="nav-link">News</a></li>
+      <li><a href="helpline.html" class="nav-link">Helpline</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button
+        class="nav-search"
+        id="navSearchButton"
+        type="button"
+        aria-label="Search"
+      >
+        <i class="fas fa-search"></i>
+      </button>
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="Toggle theme"
+        aria-pressed="false"
+      >
+        <i class="fas fa-moon" id="themeToggleIcon"></i>
+      </button>
+      <a href="login.html" class="btn-matrix btn-matrix-outline nav-cta">
+        <i class="fas fa-key"></i> Login
+      </a>
+      <a href="register.html" class="btn-matrix nav-cta-primary">
+        <i class="fas fa-arrow-right"></i> Get Started
+      </a>
     </div>
+  </div>
 </nav>
 
+<div class="search-panel" id="searchPanel" aria-hidden="true">
+  <div class="search-panel-inner">
+    <div class="search-panel-header">
+      <h3>Search CyberMatrix</h3>
+      <button
+        class="search-close"
+        id="searchCloseButton"
+        type="button"
+        aria-label="Close search"
+      >
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <label class="search-input-wrap" for="siteSearchInput">
+      <i class="fas fa-search"></i>
+      <input
+        id="siteSearchInput"
+        type="text"
+        placeholder="Search threats, tools, articles..."
+      />
+    </label>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
 <style>
-    .navbar {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        background: rgba(6, 15, 6, 0.95);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid #1f7a33;
-        box-shadow: 0 0 30px rgba(0, 170, 51, 0.1);
-    }
-    
-    .nav-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.8rem 1.5rem;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    
-    .nav-brand {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        font-size: 1.3rem;
-        color: #aaffaa;
-        text-shadow: 0 0 16px #22dd66, 0 0 40px #22aa44;
-        letter-spacing: 2px;
-        text-decoration: none;
-    }
-    
-    .nav-brand i {
-        font-size: 1.5rem;
-        color: #3ddf6a;
-        filter: drop-shadow(0 0 12px #22dd66);
-    }
-    
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--navbar-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--navbar-border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    font-weight: 800;
+    transition: all 0.2s ease;
+  }
+
+  .nav-brand:hover {
+    color: var(--accent);
+    text-shadow: 0 0 8px rgba(0, 230, 118, 0.3);
+  }
+
+  .nav-brand i {
+    font-size: 1.4rem;
+    color: var(--accent);
+    filter: drop-shadow(0 0 10px rgba(0, 230, 118, 0.3));
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 0.25rem;
+  }
+
+  .nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.84rem;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    background: rgba(0, 230, 118, 0.09);
+    border-color: rgba(0, 230, 118, 0.22);
+    color: var(--text-primary);
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .nav-search,
+  .theme-toggle {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--navbar-border);
+    color: var(--text-secondary);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+  }
+
+  .nav-search:hover,
+  .theme-toggle:hover {
+    border-color: rgba(0, 230, 118, 0.4);
+    color: var(--accent);
+    box-shadow: inset 0 0 16px rgba(0, 230, 118, 0.08);
+  }
+
+  .nav-cta,
+  .nav-cta-primary {
+    padding: 0.48rem 1rem;
+    font-size: 0.78rem;
+  }
+
+  .search-panel {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 12, 0.74);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 5rem 1rem 1rem;
+    z-index: 140;
+  }
+
+  .search-panel.open {
+    display: flex;
+  }
+
+  .search-panel-inner {
+    width: min(720px, 100%);
+    background: var(--panel-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 1rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+  }
+
+  .search-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+  }
+
+  .search-panel-header h3 {
+    font-size: 1.05rem;
+  }
+
+  .search-close {
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .search-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    width: 100%;
+    border: 1px solid var(--card-border);
+    border-radius: 999px;
+    padding: 0.8rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .search-input-wrap i {
+    color: var(--accent);
+  }
+
+  .search-input-wrap input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--text-primary);
+    font: inherit;
+  }
+
+  .search-results {
+    margin-top: 0.9rem;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .search-result {
+    display: block;
+    padding: 0.8rem 0.9rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid transparent;
+    color: var(--text-primary);
+  }
+
+  .search-result:hover {
+    border-color: rgba(0, 230, 118, 0.24);
+    color: var(--text-primary);
+  }
+
+  .search-result small {
+    display: block;
+    color: var(--text-secondary);
+    margin-top: 0.2rem;
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  .nav-toggle span {
+    width: 25px;
+    height: 2px;
+    background: var(--text-secondary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  @media (max-width: 900px) {
     .nav-links {
-        display: flex;
-        list-style: none;
-        gap: 0.3rem;
+      position: fixed;
+      top: 68px;
+      left: 0;
+      width: 100%;
+      flex-direction: column;
+      background: var(--navbar-bg-mobile);
+      backdrop-filter: blur(20px);
+      padding: 1rem;
+      gap: 0.2rem;
+      transform: translateY(-120%);
+      transition: transform 0.3s ease;
+      border-bottom: 1px solid var(--navbar-border);
     }
-    
-    .nav-link {
-        color: #88dd99;
-        text-decoration: none;
-        padding: 0.4rem 0.9rem;
-        border-radius: 8px;
-        font-size: 0.8rem;
-        letter-spacing: 1px;
-        transition: all 0.2s ease;
-        border: 1px solid transparent;
+
+    .nav-links.open {
+      transform: translateY(0);
     }
-    
-    .nav-link:hover,
-    .nav-link.active {
-        background: rgba(15, 47, 26, 0.6);
-        border-color: #2aac4a;
-        color: #ddffdd;
-        box-shadow: 0 0 15px rgba(0, 221, 85, 0.2);
-    }
-    
-    .nav-actions {
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-    }
-    
-    .theme-toggle {
-        background: transparent;
-        border: 1px solid #1f7a33;
-        color: #88dd99;
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s ease;
-        font-size: 0.9rem;
-    }
-    
-    .theme-toggle:hover {
-        border-color: #3ad86a;
-        box-shadow: 0 0 15px rgba(34, 221, 102, 0.3);
-        color: #ddffdd;
-    }
-    
+
     .nav-toggle {
-        display: none;
-        flex-direction: column;
-        gap: 5px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        padding: 5px;
+      display: flex;
     }
-    
-    .nav-toggle span {
-        width: 25px;
-        height: 2px;
-        background: #88dd99;
-        border-radius: 2px;
-        transition: all 0.3s ease;
+
+    .nav-link {
+      padding: 0.7rem 1rem;
+      display: block;
     }
-    
-    @media (max-width: 900px) {
-        .nav-links {
-            position: fixed;
-            top: 60px;
-            left: 0;
-            width: 100%;
-            flex-direction: column;
-            background: rgba(6, 15, 6, 0.98);
-            backdrop-filter: blur(12px);
-            padding: 1rem;
-            gap: 0.2rem;
-            transform: translateY(-120%);
-            transition: transform 0.3s ease;
-            border-bottom: 1px solid #1f7a33;
-        }
-        
-        .nav-links.open {
-            transform: translateY(0);
-        }
-        
-        .nav-toggle {
-            display: flex;
-        }
-        
-        .nav-link {
-            padding: 0.7rem 1rem;
-            display: block;
-        }
+
+    .nav-cta-primary {
+      display: none;
     }
+  }
 </style>
 
 <script>
-    // Navbar toggle for mobile
-    document.getElementById('navToggle')?.addEventListener('click', function() {
-        document.getElementById('navLinks')?.classList.toggle('open');
+  document.getElementById("navToggle")?.addEventListener("click", function () {
+    document.getElementById("navLinks")?.classList.toggle("open");
+  });
+
+  (function () {
+    const currentPage =
+      window.location.pathname.split("/").pop() || "index.html";
+    document.querySelectorAll(".nav-link").forEach((link) => {
+      link.classList.remove("active");
+      if (link.getAttribute("href") === currentPage) {
+        link.classList.add("active");
+      }
     });
-    
-    // Set active nav link based on current page
-    (function() {
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === currentPage) {
-                link.classList.add('active');
-            }
-        });
-    })();
+
+    const searchButton = document.getElementById("navSearchButton");
+    const searchPanel = document.getElementById("searchPanel");
+    const searchInput = document.getElementById("siteSearchInput");
+    const searchResults = document.getElementById("searchResults");
+    const closeButton = document.getElementById("searchCloseButton");
+
+    const searchableItems = [
+      {
+        title: "Threat Intelligence",
+        url: "threats.html",
+        description: "Monitor active threats and security signals",
+      },
+      {
+        title: "Security Tools",
+        url: "tools.html",
+        description: "Utilities for hashing, encoding, and analysis",
+      },
+      {
+        title: "Latest Articles",
+        url: "articles.html",
+        description: "Insights, guides, and best practices",
+      },
+      {
+        title: "Cybersecurity News",
+        url: "news.html",
+        description: "Up-to-date alerts and reports",
+      },
+      {
+        title: "Helpline",
+        url: "helpline.html",
+        description: "Get assistance from the AI security assistant",
+      },
+      {
+        title: "Contact",
+        url: "contact.html",
+        description: "Reach the CyberMatrix team",
+      },
+    ];
+
+    function renderResults(query) {
+      const cleaned = query.trim().toLowerCase();
+      if (!cleaned) {
+        searchResults.innerHTML =
+          '<div class="search-result"><strong>Try a term like</strong><small>threats, tools, news, helpline</small></div>';
+        return;
+      }
+
+      const matches = searchableItems.filter((item) => {
+        return [item.title, item.description, item.url]
+          .join(" ")
+          .toLowerCase()
+          .includes(cleaned);
+      });
+
+      if (!matches.length) {
+        searchResults.innerHTML =
+          '<div class="search-result"><strong>No results found</strong><small>Try another keyword</small></div>';
+        return;
+      }
+
+      searchResults.innerHTML = matches
+        .map(
+          (item) => `
+            <a class="search-result" href="${item.url}">
+              <strong>${item.title}</strong>
+              <small>${item.description}</small>
+            </a>
+          `,
+        )
+        .join("");
+    }
+
+    function openSearch() {
+      searchPanel?.classList.add("open");
+      searchPanel?.setAttribute("aria-hidden", "false");
+      setTimeout(() => searchInput?.focus(), 80);
+      renderResults(searchInput?.value || "");
+    }
+
+    function closeSearch() {
+      searchPanel?.classList.remove("open");
+      searchPanel?.setAttribute("aria-hidden", "true");
+      if (searchInput) searchInput.value = "";
+      searchResults.innerHTML = "";
+    }
+
+    searchButton?.addEventListener("click", openSearch);
+    closeButton?.addEventListener("click", closeSearch);
+    searchPanel?.addEventListener("click", (event) => {
+      if (event.target === searchPanel) closeSearch();
+    });
+    searchInput?.addEventListener("input", (event) =>
+      renderResults(event.target.value),
+    );
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeSearch();
+    });
+  })();
 </script>

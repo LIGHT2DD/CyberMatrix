@@ -15,26 +15,32 @@
             <h1 class="section-title"><i class="fas fa-newspaper"></i> News & Alerts</h1>
             <p class="section-subtitle">// latest cybersecurity updates</p>
 
-            <!-- CATEGORY FILTERS -->
-            <div class="news-filters" id="newsFilters">
-                <button class="filter-btn active" data-filter="all">
-                    <i class="fas fa-globe"></i> All News
-                </button>
-                <button class="filter-btn" data-filter="alert">
-                    <i class="fas fa-exclamation-triangle"></i> Alerts
-                </button>
-                <button class="filter-btn" data-filter="threat">
-                    <i class="fas fa-skull"></i> Threats
-                </button>
-                <button class="filter-btn" data-filter="incident">
-                    <i class="fas fa-fire"></i> Incidents
-                </button>
-                <button class="filter-btn" data-filter="update">
-                    <i class="fas fa-sync-alt"></i> Updates
-                </button>
-                <button class="filter-btn" data-filter="trend">
-                    <i class="fas fa-chart-line"></i> Trends
-                </button>
+            <!-- SEARCH & CATEGORY FILTERS -->
+            <div class="news-toolbar">
+                <div class="search-box-local">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="newsSearch" placeholder="Search news..." />
+                </div>
+                <div class="news-filters" id="newsFilters">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="fas fa-globe"></i> All News
+                    </button>
+                    <button class="filter-btn" data-filter="alert">
+                        <i class="fas fa-exclamation-triangle"></i> Alerts
+                    </button>
+                    <button class="filter-btn" data-filter="threat">
+                        <i class="fas fa-skull"></i> Threats
+                    </button>
+                    <button class="filter-btn" data-filter="incident">
+                        <i class="fas fa-fire"></i> Incidents
+                    </button>
+                    <button class="filter-btn" data-filter="update">
+                        <i class="fas fa-sync-alt"></i> Updates
+                    </button>
+                    <button class="filter-btn" data-filter="trend">
+                        <i class="fas fa-chart-line"></i> Trends
+                    </button>
+                </div>
             </div>
 
             <!-- NEWS LIST -->
@@ -56,11 +62,53 @@
 </html>
 
 <style>
+    .news-toolbar {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .search-box-local {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        background: rgba(2, 15, 4, 0.8);
+        border: 1px solid #1f7a33;
+        border-radius: 60px;
+        padding: 0.5rem 1.2rem;
+        transition: border 0.2s, box-shadow 0.2s;
+    }
+
+    .search-box-local:focus-within {
+        border-color: #3ad86a;
+        box-shadow: 0 0 20px rgba(0, 221, 85, 0.2);
+    }
+
+    .search-box-local i {
+        color: #44dd77;
+        font-size: 0.85rem;
+    }
+
+    .search-box-local input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        padding: 0.6rem 0;
+        font-size: 0.85rem;
+        color: #ccffcc;
+        font-family: 'Share Tech Mono', monospace;
+        outline: none;
+    }
+
+    .search-box-local input::placeholder {
+        color: #448855;
+    }
+
     .news-filters {
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
-        margin-bottom: 2rem;
     }
 
     .filter-btn {
@@ -111,6 +159,15 @@
         border-color: var(--border-glow);
         box-shadow: 0 0 20px rgba(0, 221, 85, 0.15);
         transform: translateX(4px);
+    }
+
+    #newsList {
+        transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    #newsList.is-filtering {
+        opacity: 0.55;
+        transform: translateY(4px);
     }
 
     .news-category-icon {

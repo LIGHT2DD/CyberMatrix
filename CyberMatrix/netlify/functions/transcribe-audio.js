@@ -36,11 +36,15 @@ exports.handler = async function (event) {
     };
   }
 
-  // For OpenAI: set OPENAI_API_KEY in Netlify environment variables.
-  // If you switch providers, update this code to use the provider's POST body and headers.
+  // Provider selection: Groq AI or OpenAI.
+  const GROQ_KEY = process.env.GROQ_API_KEY;
   const OPENAI_KEY = process.env.OPENAI_API_KEY;
-  if (!OPENAI_KEY) {
-    console.error("Missing OPENAI_API_KEY in environment.");
+  const apiKey = GROQ_KEY || OPENAI_KEY;
+  const provider = GROQ_KEY ? "groq" : "openai";
+  if (!apiKey) {
+    console.error(
+      "Missing API key in environment. Set GROQ_API_KEY or OPENAI_API_KEY.",
+    );
     return {
       statusCode: 500,
       headers,
@@ -65,19 +69,22 @@ exports.handler = async function (event) {
     formData.append("file", new Blob([buffer], { type: mimeType }), fileName);
     formData.append(
       "model",
-      process.env.OPENAI_SPEECH_MODEL || "gpt-4o-transcribe",
+      GROQ_KEY
+        ? process.env.GROQ_SPEECH_MODEL || "groq-speech-1"
+        : process.env.OPENAI_SPEECH_MODEL || "gpt-4o-transcribe",
     );
 
-    const response = await fetch(
-      "https://api.openai.com/v1/audio/transcriptions",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${OPENAI_KEY}`,
-        },
-        body: formData,
+    const endpoint = GROQ_KEY
+      ? `${process.env.GROQ_API_BASE_URL || "https://api.groq.ai/v1"}/audio/transcriptions`
+      : "https://api.openai.com/v1/audio/transcriptions";
+
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
       },
-    );
+      body: formData,
+    });
 
     if (!response.ok) {
       const errorText = await response.text();

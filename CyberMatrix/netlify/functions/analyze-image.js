@@ -36,11 +36,15 @@ exports.handler = async function (event) {
     };
   }
 
-  // For OpenAI: set OPENAI_API_KEY in Netlify environment variables.
-  // If you switch providers, update this code to use the provider's server-side request format.
+  // Provider selection: Groq AI or OpenAI.
+  const GROQ_KEY = process.env.GROQ_API_KEY;
   const OPENAI_KEY = process.env.OPENAI_API_KEY;
-  if (!OPENAI_KEY) {
-    console.error("Missing OPENAI_API_KEY in environment.");
+  const apiKey = GROQ_KEY || OPENAI_KEY;
+  const provider = GROQ_KEY ? "groq" : "openai";
+  if (!apiKey) {
+    console.error(
+      "Missing API key in environment. Set GROQ_API_KEY or OPENAI_API_KEY.",
+    );
     return {
       statusCode: 500,
       headers,
@@ -52,7 +56,12 @@ exports.handler = async function (event) {
   }
 
   try {
-    const model = process.env.OPENAI_IMAGE_MODEL || "gpt-4.1";
+    const baseUrl = GROQ_KEY
+      ? process.env.GROQ_API_BASE_URL || "https://api.groq.ai/v1"
+      : "https://api.openai.com/v1";
+    const model = GROQ_KEY
+      ? process.env.GROQ_IMAGE_MODEL || "groq-vision"
+      : process.env.OPENAI_IMAGE_MODEL || "gpt-4.1";
     const prompt = `You are a cybersecurity assistant. Analyze the image and describe any suspicious content, security warnings, visible alerts, sensitive details, or possible attack indicators. ${userContext ? `User context: ${userContext}` : ""}`;
 
     const payload = {
@@ -68,10 +77,11 @@ exports.handler = async function (event) {
       ],
     };
 
-    const response = await fetch("https://api.openai.com/v1/responses", {
+    const endpoint = `${baseUrl}/responses`;
+    const response = await fetch(endpoint, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${OPENAI_KEY}`,
+        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
