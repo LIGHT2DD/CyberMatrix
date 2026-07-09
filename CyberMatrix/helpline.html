@@ -17,10 +17,8 @@
                 <div class="helpline-layout">
                     <!-- SIDEBAR -->
                     <aside class="hl-sidebar">
-                        <div class="hl-sidebar-header">
-                            <h4><i class="fas fa-folder-tree"></i> MATRIX</h4>
-                        </div>
                         <nav class="hl-nav">
+                            <h4 class="hl-section-title">Topics</h4>
                             <a href="#" class="hl-nav-item active" data-topic="all">
                                 <i class="fas fa-compass"></i> All Topics
                             </a>
@@ -46,17 +44,6 @@
                                 <i class="fas fa-users"></i> Awareness
                             </a>
                         </nav>
-                        <div class="hl-chat-sessions">
-                            <div class="hl-session-heading">
-                                <span><i class="fas fa-clock-rotate-left"></i> Previous Chats</span>
-                                <button type="button" id="newChatBtn" title="Start new chat">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                            <div class="hl-session-list" id="chatSessionList">
-                                <span class="hl-session-empty">No saved chats</span>
-                            </div>
-                        </div>
                         <div class="hl-sidebar-footer">
                             <button class="btn-matrix btn-matrix-outline" id="exportChat" style="width: 100%; font-size: 0.7rem; padding: 0.5rem;">
                                 <i class="fas fa-download"></i> Export Chat
@@ -182,18 +169,18 @@
     /* ===== LAYOUT ===== */
     .helpline-layout {
         display: grid;
-        grid-template-columns: 200px 1fr;
+        grid-template-columns: 260px 1fr;
         gap: 1.5rem;
         min-height: 75vh;
     }
 
     /* ===== SIDEBAR ===== */
     .hl-sidebar {
-        background: var(--panel-bg);
+        background: var(--card-bg);
         border: 1px solid var(--card-border);
         border-radius: 20px;
-        padding: 1.2rem 0.8rem;
-        box-shadow: 0 16px 45px rgba(0, 0, 0, 0.16);
+        padding: 1rem;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
         display: flex;
         flex-direction: column;
         height: fit-content;
@@ -201,28 +188,16 @@
         top: 80px;
         max-height: calc(100vh - 100px);
         overflow-y: auto;
+        overflow-x: hidden;
     }
 
     .hl-sidebar::-webkit-scrollbar { width: 4px; }
-    .hl-sidebar::-webkit-scrollbar-thumb { background: #2aac4a; border-radius: 12px; }
-
-    .hl-sidebar-header {
-        padding: 0 0.4rem 0.8rem;
-        border-bottom: 1px solid var(--card-border);
-        margin-bottom: 0.8rem;
-    }
-
-    .hl-sidebar-header h4 {
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        color: var(--accent);
-    }
+    .hl-sidebar::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--accent), var(--accent-hover)); border-radius: 12px; }
 
     .hl-nav {
         display: flex;
         flex-direction: column;
-        gap: 0.15rem;
+        gap: 0.1rem;
         flex: 1;
     }
 
@@ -230,34 +205,38 @@
         display: flex;
         align-items: center;
         gap: 0.7rem;
-        padding: 0.5rem 0.7rem;
-        border-radius: 10px;
-        font-size: 0.75rem;
+        padding: 0.65rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.78rem;
         color: var(--text-secondary);
         text-decoration: none;
-        transition: all 0.15s ease;
+        transition: all 0.2s ease;
         border: 1px solid transparent;
     }
 
     .hl-nav-item i {
         width: 18px;
-        color: var(--accent);
+        color: var(--text-secondary);
         font-size: 0.8rem;
         text-align: center;
     }
 
     .hl-nav-item:hover {
         background: rgba(0, 230, 118, 0.08);
-        border-color: rgba(0, 230, 118, 0.28);
+        border-color: rgba(0, 230, 118, 0.38);
         color: var(--text-primary);
-        transform: translateX(3px);
     }
 
     .hl-nav-item.active {
-        background: rgba(0, 230, 118, 0.1);
-        border-color: rgba(0, 230, 118, 0.42);
+        background: var(--panel-alt-bg);
+        border-color: rgba(0, 230, 118, 0.35);
         color: var(--text-primary);
-        box-shadow: inset 0 0 16px rgba(0, 230, 118, 0.08);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    .hl-nav-item:hover i,
+    .hl-nav-item.active i {
+        color: var(--accent);
     }
 
     .hl-sidebar-footer {
@@ -266,89 +245,14 @@
         border-top: 1px solid var(--card-border);
     }
 
-    .hl-chat-sessions {
-        margin: 0.8rem 0;
-        padding: 0.8rem 0;
-        border-top: 1px solid var(--card-border);
-        border-bottom: 1px solid var(--card-border);
-    }
-
-    .hl-session-heading {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.5rem;
-        color: var(--accent);
-        font-size: 0.68rem;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        margin-bottom: 0.55rem;
-    }
-
-    .hl-session-heading button {
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        border: 1px solid rgba(0, 230, 118, 0.35);
-        background: rgba(0, 230, 118, 0.08);
-        color: var(--accent);
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s ease;
-    }
-
-    .hl-session-heading button:hover {
-        background: rgba(0, 230, 118, 0.16);
-        transform: translateY(-1px);
-    }
-
-    .hl-session-list {
-        display: grid;
-        gap: 0.35rem;
-        max-height: 150px;
-        overflow-y: auto;
-        padding-right: 0.2rem;
-    }
-
-    .hl-session-list::-webkit-scrollbar { width: 4px; }
-    .hl-session-list::-webkit-scrollbar-thumb { background: #2aac4a; border-radius: 12px; }
-
-    .hl-session-item {
-        width: 100%;
-        background: rgba(0, 230, 118, 0.05);
-        border: 1px solid rgba(0, 230, 118, 0.18);
-        color: var(--text-secondary);
-        border-radius: 10px;
-        padding: 0.5rem 0.55rem;
-        cursor: pointer;
-        text-align: left;
-        font-size: 0.7rem;
-        line-height: 1.3;
-        transition: all 0.15s ease;
-    }
-
-    .hl-session-item:hover,
-    .hl-session-item.active {
-        background: rgba(0, 230, 118, 0.1);
-        border-color: rgba(0, 230, 118, 0.36);
+    .hl-section-title {
+        margin: 0 0 0.8rem;
+        padding: 0 0.65rem;
         color: var(--text-primary);
-    }
-
-    .hl-session-title {
-        display: block;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .hl-session-time,
-    .hl-session-empty {
-        display: block;
-        color: var(--text-secondary);
-        font-size: 0.62rem;
-        opacity: 0.8;
+        font-size: 0.86rem;
+        font-weight: 700;
+        letter-spacing: 0;
+        text-transform: none;
     }
 
     /* ===== MAIN ===== */
@@ -380,10 +284,9 @@
 
     .hl-brand h1 {
         font-size: 1.4rem;
-        font-weight: 400;
-        letter-spacing: 2px;
+        font-weight: 600;
+        letter-spacing: 0;
         color: var(--text-primary);
-        text-shadow: 0 0 16px rgba(0, 230, 118, 0.18);
     }
 
     .hl-badges {
@@ -396,12 +299,13 @@
         align-items: center;
         gap: 0.4rem;
         background: rgba(0, 230, 118, 0.1);
-        padding: 0.25rem 1rem;
-        border-radius: 40px;
-        font-size: 0.65rem;
+        padding: 0.32rem 0.8rem;
+        border-radius: 999px;
+        font-size: 0.7rem;
         color: var(--accent);
         border: 1px solid rgba(0, 230, 118, 0.22);
-        letter-spacing: 1px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
     }
 
     /* ===== CHAT WINDOW ===== */
@@ -419,8 +323,8 @@
     }
 
     .hl-chat-window::-webkit-scrollbar { width: 5px; }
-    .hl-chat-window::-webkit-scrollbar-track { background: #051005; }
-    .hl-chat-window::-webkit-scrollbar-thumb { background: #2aac4a; border-radius: 12px; }
+    .hl-chat-window::-webkit-scrollbar-track { background: #070b10; }
+    .hl-chat-window::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--accent), var(--accent-hover)); border-radius: 12px; }
 
     /* Messages */
     .message {
@@ -464,7 +368,7 @@
         line-height: 1.7;
         font-size: 0.85rem;
         border: 1px solid var(--card-border);
-        box-shadow: 0 2px 12px rgba(0, 20, 0, 0.6);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
         word-break: break-word;
         color: var(--text-primary);
     }
@@ -485,12 +389,12 @@
         max-height: 250px;
         border-radius: 12px;
         margin: 0.5rem 0;
-        border: 1px solid #2aac4a;
+        border: 1px solid rgba(0, 230, 118, 0.35);
         cursor: pointer;
     }
 
     .bubble a {
-        color: #44dd77;
+        color: var(--accent);
         text-decoration: underline;
     }
 
@@ -515,10 +419,10 @@
     .typing-indicator .dot {
         width: 8px;
         height: 8px;
-        background: #44dd77;
+        background: var(--accent);
         border-radius: 50%;
         animation: pulseDot 1.4s infinite both;
-        box-shadow: 0 0 12px #33dd66;
+        box-shadow: 0 0 12px rgba(0, 230, 118, 0.35);
     }
 
     .typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
@@ -565,7 +469,7 @@
     #filePreviewContent img {
         max-height: 45px;
         border-radius: 8px;
-        border: 1px solid #1f7a33;
+        border: 1px solid rgba(0, 230, 118, 0.35);
     }
 
     #filePreviewContent audio {
@@ -608,7 +512,7 @@
 
     .hl-input-box:focus-within {
         border-color: rgba(0, 230, 118, 0.45);
-        box-shadow: 0 0 0 2px rgba(42, 172, 74, 0.33), 0 0 25px rgba(0, 221, 85, 0.2);
+        box-shadow: 0 0 0 2px rgba(0, 230, 118, 0.12), 0 12px 30px rgba(0, 230, 118, 0.12);
     }
 
     .input-actions-left {
@@ -639,10 +543,10 @@
     }
 
     .input-action-btn.active-tool {
-        background: rgba(15, 63, 26, 0.6);
-        border-color: #3ad86a;
-        color: #eeffee;
-        box-shadow: 0 0 15px rgba(34, 221, 102, 0.3);
+        background: rgba(0, 230, 118, 0.12);
+        border-color: rgba(0, 230, 118, 0.45);
+        color: var(--accent);
+        box-shadow: 0 12px 30px rgba(0, 230, 118, 0.12);
     }
 
     .input-action-btn.recording {
@@ -664,9 +568,9 @@
         padding: 0.65rem 0;
         font-size: 0.85rem;
         color: var(--text-primary);
-        font-family: 'Share Tech Mono', monospace;
+        font-family: var(--font-body);
         outline: none;
-        letter-spacing: 0.5px;
+        letter-spacing: 0;
     }
 
     .hl-input-box > input::placeholder {
@@ -825,7 +729,7 @@
         justify-content: center;
         z-index: 10;
         transition: all 0.2s;
-        font-family: 'Share Tech Mono', monospace;
+        font-family: var(--font-body);
     }
 
     .modal-close:hover {
@@ -838,17 +742,16 @@
         position: fixed;
         bottom: 2rem;
         right: 2rem;
-        background: #0f3f1a;
-        border: 1px solid #3ad86a;
-        color: #ddffdd;
+        background: var(--panel-bg);
+        border: 1px solid rgba(0, 230, 118, 0.35);
+        color: var(--text-primary);
         padding: 0.7rem 1.5rem;
-        border-radius: 40px;
+        border-radius: 999px;
         font-size: 0.75rem;
         z-index: 300;
         animation: fadeSlide 0.3s ease;
-        font-family: 'Share Tech Mono', monospace;
-        box-shadow: 0 0 20px rgba(0, 170, 51, 0.2);
-        text-shadow: 0 0 6px #33dd66;
+        font-family: var(--font-body);
+        box-shadow: 0 16px 45px rgba(0, 0, 0, 0.16);
     }
 
     /* ===== LIVE TRANSCRIPTION BAR (injected by JS) ===== */
@@ -871,21 +774,17 @@
         }
         .hl-sidebar {
             position: static;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 0.3rem;
+            gap: 0.9rem;
             padding: 0.8rem;
             max-height: none;
-        }
-        .hl-sidebar-header {
-            width: 100%;
-            margin-bottom: 0;
-            padding-bottom: 0.4rem;
         }
         .hl-nav {
             flex-direction: row;
             flex-wrap: wrap;
+            width: 100%;
+            padding-top: 0.8rem;
         }
+        .hl-section-title { width: 100%; margin-bottom: 0.35rem; }
         .hl-nav-item {
             padding: 0.3rem 0.6rem;
             font-size: 0.7rem;
@@ -896,15 +795,6 @@
             width: 100%;
             border-top: none;
             padding-top: 0.4rem;
-        }
-        .hl-chat-sessions {
-            width: 100%;
-            margin: 0.4rem 0;
-            padding: 0.6rem 0;
-        }
-        .hl-session-list {
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            max-height: none;
         }
         .hl-sidebar-footer button,
         .hl-sidebar-footer a {
